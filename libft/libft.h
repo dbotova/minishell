@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdarg.h>
@@ -21,6 +22,7 @@
 # include <locale.h>
 # include <stdint.h>
 # include <float.h>
+# include <limits.h>
 # include "./array_wrap/array_wrap.h"
 # define BUFF_SIZE 2
 # define ABS(x) (x < 0) ? (-x) : (x)

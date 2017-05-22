@@ -18,7 +18,11 @@ void				free_array(t_array_wrap *array)
 
 	i = 0;
 	while (i < array->size)
-		SMART_FREE(array->data[i++]);
+	{
+		if (array->data[i])
+			SMART_FREE(array->data[i]);
+		i++;
+	}
 	SMART_FREE(array->data);
 	SMART_FREE(array);
 }
