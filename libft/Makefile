@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 PRINTF = ./ft_printf
+ARRAY = ./array_wrap
 PPATH = ./$(PRINTF)/print
 RPATH = ./$(PRINTF)/read
 UPATH = ./$(PRINTF)/util
@@ -47,7 +48,11 @@ SRC =	libft.h																\
 		$(RPATH)/ft_wstr_read.c $(RPATH)/ft_hex_read.c						\
 		$(UPATH)/ft_create_jump_table.c $(UPATH)/ft_getflags.c 				\
 		$(UPATH)/ft_newflagslst.c $(RPATH)/ft_str_read.c ft_itoa_base.c 	\
-		get_next_word.c get_next_line.c
+		get_next_word.c get_next_line.c ft_hash.c $(ARRAY)/add_element.c 	\
+		$(ARRAY)/copy_array.c $(ARRAY)/delete_element.c 					\
+		$(ARRAY)/edit_element.c $(ARRAY)/find_element.c 					\
+		$(ARRAY)/free_array.c $(ARRAY)/init_array.c 						\
+		$(ARRAY)/print_elements.c $(ARRAY)/realloc_array.c
 
 OBJ = 	ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o			\
 		ft_isdigit.o ft_isprint.o ft_ispunct.o ft_isspace.o ft_itoa.o		\
@@ -75,7 +80,10 @@ OBJ = 	ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o			\
 		ft_ltoa_base.o ft_cunsigned_print.o ft_nbrsize.o ft_power.o 		\
 		ft_putnstr.o ft_putwchar.o ft_putwstr.o ft_ultoa_base.o 			\
 		ft_wcharlen.o ft_wstrlen.o ft_create_jump_table.o ft_getflags.o 	\
-		ft_newflagslst.o ft_num_separete.o ft_itoa_base.o get_next_word.o
+		ft_newflagslst.o ft_num_separete.o ft_itoa_base.o get_next_word.o 	\
+		ft_hash.o add_element.o copy_array.o delete_element.o 				\
+		edit_element.o find_element.o free_array.o init_array.o 			\
+		print_elements.o realloc_array.o
 
 NAME = libft.a
 

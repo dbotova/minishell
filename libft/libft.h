@@ -21,6 +21,7 @@
 # include <locale.h>
 # include <stdint.h>
 # include <float.h>
+# include "./array_wrap/array_wrap.h"
 # define BUFF_SIZE 2
 # define ABS(x) (x < 0) ? (-x) : (x)
 # define MIN(x, y) (x < y) ? (x) : (y)
@@ -30,6 +31,7 @@
 # define STR "sSpdDioOuUxXcC +-.0123456789zlhj#%*L'"
 # define FLAGS "+-.0123456789zlhj#* L'"
 # define SMART_FREE(x) {free(x); x = NULL;}
+# define MAGIC_NUMBER 42
 
 typedef struct			s_file
 {
@@ -88,6 +90,7 @@ typedef struct			s_flags
 }						t_flags;
 
 int						ft_printf(char *args, ...);
+unsigned int 			hash(char *message, size_t message_length);
 char					*ft_ltoa_base(long long n, int base);
 int						get_next_line(const int fd, char **line);
 int						get_next_word(const char *line, char **word);

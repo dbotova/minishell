@@ -12,7 +12,6 @@ unsigned int hash(char *message)
 	unsigned int message_block = 0;
 	size_t message_length = strlen(message);
 
-   // Loop over the message 32-bits at-a-time
 	while (message_length >= 4)
 	{
 		memcpy(&message_block, message, sizeof(unsigned int));
@@ -22,7 +21,6 @@ unsigned int hash(char *message)
 		message        += sizeof(unsigned int);
 	}
 
-   // Are there any remaining bytes?
 	if (message_length)
 	{
 		memcpy(&message_block, message, message_length);
@@ -34,6 +32,12 @@ unsigned int hash(char *message)
 
 int main(int argc, char **argv, char **envp)
 {
+	char *curdir;
+
+	curdir = (char*)malloc(sizeof(char) * PATH_MAX);
+	ft_memset(curdir, 0, sizeof(char) * PATH_MAX);
+
+	
 	int i = 0;
 
    	for (; envp[i]; i++)
@@ -45,5 +49,10 @@ int main(int argc, char **argv, char **envp)
    	printf("exit: %u\n", hash("exit"));
    	printf("cd: %u\n", hash("cd"));
    	printf("echo: %u\n", hash("echo"));
+   	printf("pwd: %u\n", hash("pwd"));
+   	printf("env: %u\n", hash("env"));
+   	chdir(argv[1]);
+
+   	system("ls");
    	return 0;
 }
