@@ -16,12 +16,12 @@ int main(int argc, char **argv, char **envp)
 
 
    	printf("\n\n\nCOPY\n\n\n");
-   	copy_array(&envars, envp);
+   	copy_array(envars, envp);
    	print_elements(envars);
 
 
    	printf("\n\n\nADD TEST\n\n\n");
-   	add_element(&envars, "TEST=1234");
+   	add_element(envars, "TEST=1234");
    	print_elements(envars);
 
 
@@ -39,6 +39,10 @@ int main(int argc, char **argv, char **envp)
 
    	printf("\n\n\nDELETE TEST\n\n\n");
    	delete_element(envars, "TEST");
+   	print_elements(envars);
+
+   	printf("\n\n\nUPDATE HOME\n\n\n");
+   	edit_element(envars, "HOME", "HOME SWEET HOME", '=');
    	print_elements(envars);
    	
    	if (argc > 1)

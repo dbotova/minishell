@@ -25,11 +25,11 @@ typedef struct	s_array_wrap
 void			init_array(t_array_wrap **array, size_t size);
 t_array_wrap	*realloc_array(t_array_wrap *old_array, size_t new_size);
 void			free_array(t_array_wrap *array);
-void			add_element(t_array_wrap **array, char *new_item);
+void			add_element(t_array_wrap *array, char *new_item);
 void			edit_element(t_array_wrap *array, char *item, char *value, char symb);
-size_t			find_element(t_array_wrap *array, char *item, size_t len, char symb);
+ssize_t			find_element(t_array_wrap *array, char *item, size_t len, char symb);
 void			print_elements(t_array_wrap *array);
 void			delete_element(t_array_wrap *array, char *element);
-void			copy_array(t_array_wrap **array, char **elements);
+void			copy_array(t_array_wrap *array, char **elements);
 
 #endif

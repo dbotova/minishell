@@ -14,7 +14,7 @@
 
 void		delete_element(t_array_wrap *array, char *element)
 {
-	size_t	i;
+	ssize_t	i;
 	size_t	len;
 
 	len = ft_strlen(element);

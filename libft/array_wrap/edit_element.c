@@ -14,12 +14,12 @@
 
 void				edit_element(t_array_wrap *array, char *item, char *value, char symb)
 {
-	size_t			i;
+	ssize_t			i;
 	size_t			len;
 
 	len = ft_strlen(item);
 	i = find_element(array, item, len, symb);
-	if (i)
+	if (i >= 0)
 	{
 		ft_memset(array->data[i] + (len + 1), 0, ft_strlen(array->data[i]) - (len + 1));
 		ft_strcpy(array->data[i] + (len + 1), value);

@@ -12,25 +12,32 @@
 
 OBJS =	main.o
 
-LIBS = ./libft/libft.a
+LIBFT = ./libft/libft.a
+
+LIBS= $(LIBFT)
 
 HEADERS = minishell.h ./libft/libft.h
 
-CFLAGS += -Wall -Werror -Wextra -g -ggdb
+CFLAGS += -Wall -Werror -Wextra -g -O0
 
 NAME = minishell
 
 all: $(NAME)
 
+$(LIBFT):
+	$(MAKE) -C ./libft
+
 $(OBJ): $(HEADERS)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
 clean: 
 	rm -f $(OBJS)
+	$(MAKE) -C ./libft clean
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C ./libft fclean
 
 re: fclean all

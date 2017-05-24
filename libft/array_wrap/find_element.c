@@ -12,7 +12,7 @@
 
 #include "array_wrap.h"
 
-size_t				find_element(t_array_wrap *array, char *item, size_t len, char symb)
+ssize_t				find_element(t_array_wrap *array, char *item, size_t len, char symb)
 {
 	unsigned int	key;
 	size_t			i;

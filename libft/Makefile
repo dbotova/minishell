@@ -90,7 +90,7 @@ NAME = libft.a
 all: $(NAME)
 
 $(NAME):
-	gcc -c -Wall -Wextra -Werror $(SRC)
+	gcc -c -g -Wall -Wextra -Werror $(SRC)
 	ar rc $(NAME) $(OBJ)
 
 clean:

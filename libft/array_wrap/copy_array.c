@@ -12,7 +12,7 @@
 
 #include "array_wrap.h"
 
-void		copy_array(t_array_wrap **array, char **elements)
+void		copy_array(t_array_wrap *array, char **elements)
 {
 	size_t	i;
 
