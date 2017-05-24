@@ -22,11 +22,9 @@ size_t				find_element(t_array_wrap *array, char *item, size_t len, char symb)
 	while (i < array->used)
 	{
 		if (hash(array->data[i], len) == key)
-		{
 			if (ft_strncmp(array->data[i], item, len) == 0 &&
-				(array->data[i][len] == symb || symb == 0))
+				array->data[i][len] == symb)
 				return (i);
-		}
 		i++;
 	}
 	return (-1);

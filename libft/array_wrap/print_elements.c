@@ -17,9 +17,9 @@ void		print_elements(t_array_wrap *array)
 	size_t	i;
 
 	i = 0;
-	while (array && i < array->used)
+	while (i < array->used)
 	{
-		if (array->data[i])
+		if (array->data[i][0] != 0)
 			ft_printf("%s\n", array->data[i]);
 		i++;
 	}

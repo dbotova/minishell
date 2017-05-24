@@ -16,14 +16,19 @@ t_array_wrap		*realloc_array(t_array_wrap *old_array, size_t new_size)
 {
 	t_array_wrap	*new_array;
 	size_t			i;
+	size_t			j;
 
 	i = 0;
+	j = 0;
+
 	init_array(&new_array, new_size);
 	while(i < old_array->size)
 	{
-		ft_strcpy(new_array->data[i], old_array->data[i]);
+		if (old_array->data[i][0] != 0)
+			ft_strcpy(new_array->data[j++], old_array->data[i]);
 		i++;
 	}
-	new_array->used = old_array->size;
+	new_array->used = j;
+	free_array(old_array);
 	return (new_array);
 }
