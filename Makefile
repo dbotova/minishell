@@ -10,7 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-OBJS =	main.o
+OBJS =	main.o \
+		ft_setenv.o \
+		ft_unsetenv.o
 
 LIBFT = ./libft/libft.a
 

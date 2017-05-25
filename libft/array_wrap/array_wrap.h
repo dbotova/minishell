@@ -29,7 +29,7 @@ void			add_element(t_array_wrap *array, char *new_item);
 void			edit_element(t_array_wrap *array, char *item, char *value, char symb);
 ssize_t			find_element(t_array_wrap *array, char *item, size_t len, char symb);
 void			print_elements(t_array_wrap *array);
-void			delete_element(t_array_wrap *array, char *element);
+int			delete_element(t_array_wrap *array, char *element);
 void			copy_array(t_array_wrap *array, char **elements);
 
 #endif
