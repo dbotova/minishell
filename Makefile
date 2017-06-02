@@ -12,7 +12,9 @@
 
 OBJS =	main.o \
 		ft_setenv.o \
-		ft_unsetenv.o
+		ft_unsetenv.o \
+		ft_cd.o \
+		ft_echo.o
 
 LIBFT = ./libft/libft.a
 
