@@ -14,12 +14,21 @@
 
 t_array_wrap		*realloc_array(t_array_wrap *array, size_t new_size)
 {
-	char			**old_data = array->data;
+	char			**old_data;
+	size_t			i;
+	size_t			old_size;
 
+	i = 0;
+	old_size = array->size;
+	old_data = array->data;
 	array->data = (char**)malloc(sizeof(char*) * new_size);
-	ft_memset(array->data, 0, sizeof(char) * new_size);
-	ft_memcpy(array->data, old_data, sizeof(char*) * array->size);
-
+	array->size = new_size;
+	while (i < new_size)
+	{
+		array->data[i] = (char*)malloc(sizeof(char) * PATH_MAX);
+		ft_memset(array->data[i++], 0, sizeof(char) * PATH_MAX);
+	}
+	ft_memcpy(array->data, old_data, sizeof(char*) * old_size);
 	SMART_FREE(old_data);
 	return (array);
 }

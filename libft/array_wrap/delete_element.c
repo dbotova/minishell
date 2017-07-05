@@ -19,7 +19,7 @@ int		delete_element(t_array_wrap *array, char *element)
 
 	len = ft_strlen(element);
 	i = find_element(array, element, len, '=');
-	if (i)
+	if (i >= 0)
 	{
 		ft_memset(array->data[i], 0, sizeof(char) * PATH_MAX);
 		return (0);
