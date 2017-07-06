@@ -10,11 +10,19 @@
 #                                                                              #
 # **************************************************************************** #
 
-OBJS =	main.o \
-		ft_setenv.o \
-		ft_unsetenv.o \
-		ft_cd.o \
-		ft_echo.o
+#BUILDINS = buildins
+#SRC =	main.c						\
+		$(BUILDINS)/ft_setenv.c 	\
+		$(BUILDINS)/ft_unsetenv.c 	\
+		$(BUILDINS)/ft_cd.c 		\
+		$(BUILDINS)/ft_echo.c 		\
+		$(BUILDINS)/ft_exit.c
+OBJS =	main.o 						\
+		ft_setenv.o 	\
+		ft_unsetenv.o 	\
+		ft_cd.o 		\
+		ft_echo.o 		\
+		ft_exit.o
 
 LIBFT = ./libft/libft.a
 

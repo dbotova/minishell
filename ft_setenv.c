@@ -12,6 +12,33 @@
 
 #include "minishell.h"
 
+int	ft_export(char *var)
+{
+	char	*name;
+	char	*val;
+	size_t	val_len;
+
+	val_len = 0;
+	name = NULL;
+	val = NULL;
+	if (!var)
+		print_elements(g_envars);
+	else
+	{
+		name = var;
+		val = ft_strstr(var, "=") + 1; //check for format
+		val_len = ft_strlen(val);
+		name[val - var - 1] = 0;
+		if (val[0] == '"' && val[val_len - 1] == '"') //check ending qoute 
+		{
+			val[val_len - 1] = 0;
+			val++;
+		}
+		ft_setenv(name, val, 1);
+	}
+	return (0);
+}
+
 int		ft_setenv(char *name, char *value, int overwrite)
 {
 	int	exsist;
