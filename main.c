@@ -26,7 +26,7 @@ static int parse_commands(char **commands)
       else if (ft_strncmp(*commands, "export", space - *commands) == 0) //print env if no arguments
          ft_export(space ? space + 1 : space);
       else if (ft_strncmp(*commands, "cd", space - *commands) == 0) //print env if no arguments
-         ft_cd(space ? ft_strdup(space + 1 : space);
+         ft_cd(space ? space + 1 : space);
       else if (ft_strncmp(*commands, "exit", space - *commands) == 0)
          return (1);
       commands++;

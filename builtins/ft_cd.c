@@ -20,7 +20,7 @@ static char		*get_val(char *item)
 	i = find_element(g_envars, item, ft_strlen(item), '=');
 	if (i >= 0)
 		val = ft_strstr(g_envars->data[i], "=") + 1;
-	return (ft_strdup(val));
+	return (val);
 }
 
 static char *get_full_path(char *path, char *home)
@@ -56,11 +56,7 @@ void			ft_cd(char *path)
 		ft_printf("Problem with getcwd\n");
 		return ;
 	}
-	printf("path: %s old: %s home: %s buf: %s\n", path, old_pwd, home, buf);
 	ft_setenv("OLDPWD", old_pwd, 1);
 	ft_setenv("PWD", buf, 1);
 	SMART_FREE(buf);
-	SMART_FREE(old_pwd);
-	SMART_FREE(home);
-	SMART_FREE(path);
 }
