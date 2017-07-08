@@ -10,19 +10,14 @@
 #                                                                              #
 # **************************************************************************** #
 
-#BUILDINS = buildins
-#SRC =	main.c						\
-		$(BUILDINS)/ft_setenv.c 	\
-		$(BUILDINS)/ft_unsetenv.c 	\
-		$(BUILDINS)/ft_cd.c 		\
-		$(BUILDINS)/ft_echo.c 		\
-		$(BUILDINS)/ft_exit.c
+BUILTINS = builtins
+
 OBJS =	main.o 						\
-		ft_setenv.o 	\
-		ft_unsetenv.o 	\
-		ft_cd.o 		\
-		ft_echo.o 		\
-		ft_exit.o
+		$(BUILTINS)/ft_setenv.o 	\
+		$(BUILTINS)/ft_unsetenv.o 	\
+		$(BUILTINS)/ft_cd.o 		\
+		$(BUILTINS)/ft_echo.o 		\
+		$(BUILTINS)/ft_exit.o
 
 LIBFT = ./libft/libft.a
 
@@ -31,7 +26,7 @@ LIBS= $(LIBFT)
 HEADERS = minishell.h ./libft/libft.h
 
 #CFLAGS += -Wall -Werror -Wextra -g -O0
-CFLAGS += -g -O0
+CFLAGS += -g -O0 -I.
 
 NAME = minishell
 

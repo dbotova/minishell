@@ -24,8 +24,9 @@ static int parse_commands(char **commands)
       else if (ft_strncmp(*commands, "unset", space - *commands) == 0)
          ft_unsetenv(space + 1);
       else if (ft_strncmp(*commands, "export", space - *commands) == 0) //print env if no arguments
-         //add_element(g_envars, space + 1); //ft_setenv
          ft_export(space ? space + 1 : space);
+      else if (ft_strncmp(*commands, "cd", space - *commands) == 0) //print env if no arguments
+         ft_cd(space ? ft_strdup(space + 1 : space);
       else if (ft_strncmp(*commands, "exit", space - *commands) == 0)
          return (1);
       commands++;
@@ -43,7 +44,7 @@ int main(int argc, char **argv, char **envp)
 	init_setup(envp);
 	while (42)
 	{
-      ft_printf(">> ");
+      ft_printf(PROMPT);
       get_next_line(0, &line);
       commands = ft_strsplit(line, ';');
       if (parse_commands(commands))

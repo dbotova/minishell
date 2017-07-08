@@ -7,6 +7,7 @@
 # include <unistd.h>
 # include <sys/stat.h>
 # define MAGIC_NUMBER 42
+# define PROMPT ">> "
 
 extern t_array_wrap *g_envars;
 
