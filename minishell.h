@@ -8,6 +8,7 @@
 # include <sys/stat.h>
 # define MAGIC_NUMBER 42
 # define PROMPT ">> "
+# define DQUOTE "<dquote> "
 
 extern t_array_wrap *g_envars;
 
