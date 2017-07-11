@@ -229,4 +229,5 @@ int						ft_cchar_print(va_list ap, union u_types tp,
 						t_flags *flags);
 int						ft_print(union u_types tp, t_flags *flags);
 int						ft_undef_print(char *ptr, t_flags *flags);
+void					ft_strtrimchr(char *str, char c);
 #endif

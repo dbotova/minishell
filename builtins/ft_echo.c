@@ -12,21 +12,6 @@
 
 #include "minishell.h"
 
-static void ft_strtromchr(char *str, char c)
-{
-	char *match;
-	size_t len;
-
-	match = NULL;
-	len = 0;
-	while ((match = ft_strchr(str, '"')))
-	{
-		len = ft_strlen(match) - 1; /* minus 1 for found qoute */
-		match[0] = 0; /* delete found qoute */
-		ft_strcat(match, match + 1);
-	}
-}
-
 static int 	ft_quote_match(char *path)
 {
 	int 	count;
@@ -56,13 +41,12 @@ static void	ft_dquote(t_array_wrap *lines)
 		ft_printf(DQUOTE);
 		get_next_line(0, &next);
 		qoute_end = ft_quote_match(next);
-		ft_strtromchr(next, '"');
 		add_element(lines, next);
 		SMART_FREE(next);
 	}
 }
 
-int	ft_echo(char *path) //trim from quotes
+int	ft_echo(char *path)
 {
 	t_array_wrap *lines;
 	size_t		i;
@@ -74,7 +58,10 @@ int	ft_echo(char *path) //trim from quotes
 	if (ft_quote_match(path))
 		ft_dquote(lines);
 	while (i < lines->used)
+	{
+		ft_strtrimchr(lines->data[i], '"');
 		ft_printf("%s\n", lines->data[i++]);
+	}
 	free_array(lines);
 	return (0);
 }
