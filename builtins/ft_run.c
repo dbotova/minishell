@@ -29,7 +29,7 @@ static int		check_status(int status)
 	return (result);
 }
 
-void	ft_run(char *path)
+int	ft_run(char *path)
 {
 	pid_t	pid;
 	pid_t	wpid;
@@ -46,7 +46,8 @@ void	ft_run(char *path)
 	if ((pid = fork()) < 0)
 		exit(1);
 	if (pid == 0)
-		execve(binary, path ? ft_strstr(path, " ") + 1 : path, g_envars->data);
+		if (execve(binary, path ? ft_strstr(path, " ") + 1 : path, g_envars->data) == -1)
+			return (-1);
 	while ((wpid = wait(&status)) > 0)
 	{
 		if (pid == wpid)
@@ -54,4 +55,5 @@ void	ft_run(char *path)
 		result = check_status(status);
 	}
 	SMART_FREE(binary);
+	return (0);
 }

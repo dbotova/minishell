@@ -31,8 +31,8 @@ static int parse_commands(char **commands)
          ft_echo(space ? space + 1 : space);
       else if (ft_strncmp(*commands, "exit", space - *commands) == 0)
          return (1);
-      else
-         ft_run(*commands);
+      else if (ft_run(*commands) == -1)
+         ft_printf("%s : No such file or directory\n", *commands);
       commands++;
    }
    return (0);

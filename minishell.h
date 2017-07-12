@@ -19,6 +19,6 @@ void	ft_cd(char *path);
 int		ft_echo(char *line);
 int		ft_export(char *var);
 void	ft_exit(void);
-void	ft_run(char *path);
+int		ft_run(char *path);
 
 #endif
