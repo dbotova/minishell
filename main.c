@@ -31,6 +31,8 @@ static int parse_commands(char **commands)
          ft_echo(space ? space + 1 : space);
       else if (ft_strncmp(*commands, "exit", space - *commands) == 0)
          return (1);
+      else
+         ft_run(*commands);
       commands++;
    }
    return (0);

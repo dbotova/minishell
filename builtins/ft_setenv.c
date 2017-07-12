@@ -39,7 +39,7 @@ int	ft_export(char *var)
 	return (0);
 }
 
-int		ft_setenv(char *name, char *value, int overwrite)
+int		ft_setenv(char *name, char *value, int overwrite) //don't change OLDPWD if path is a current dir
 {
 	int	exsist;
 	char *item;

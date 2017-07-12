@@ -25,7 +25,7 @@ unsigned int hash(char *message, size_t message_length)
 
 	while (message_length >= 4)
 	{
-		memcpy(&message_block, message, sizeof(unsigned int));
+		ft_memcpy(&message_block, message, sizeof(unsigned int));
 
 		internal_state = mix(message_block, internal_state);
 		message_length -= sizeof(unsigned int);
@@ -34,7 +34,7 @@ unsigned int hash(char *message, size_t message_length)
 
 	if (message_length)
 	{
-		memcpy(&message_block, message, message_length);
+		ft_memcpy(&message_block, message, message_length);
 		internal_state = mix(message_block, internal_state);
 	}
 

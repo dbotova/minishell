@@ -17,7 +17,8 @@ OBJS =	main.o 						\
 		$(BUILTINS)/ft_unsetenv.o 	\
 		$(BUILTINS)/ft_cd.o 		\
 		$(BUILTINS)/ft_echo.o 		\
-		$(BUILTINS)/ft_exit.o
+		$(BUILTINS)/ft_exit.o 		\
+		$(BUILTINS)/ft_run.o
 
 LIBFT = ./libft/libft.a
 
