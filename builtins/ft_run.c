@@ -12,48 +12,28 @@
 
 #include "minishell.h"
 
-static int		check_status(int status)
-{
-	int			result;
-
-	result = 10;
-	if (WIFSIGNALED(status))
-	{
-		if (WTERMSIG(status) == SIGBUS)
-			result = 1;
-		if (WTERMSIG(status) == SIGSEGV)
-			result = 2;
-	}
-	else
-		result = WEXITSTATUS(status);
-	return (result);
-}
-
 int	ft_run(char *path)
 {
 	pid_t	pid;
 	pid_t	wpid;
-	int		result;
 	int 	status;
-	char	*binary;
+	char	**args;
 
-	binary = ft_strdup(path);
-	binary[ft_strstr(binary, " ") - binary] = 0;
 	pid = 0;
 	wpid = 0;
-	result = 0;
 	status = 0;
+	args = ft_strsplit(path, ' ');
 	if ((pid = fork()) < 0)
 		exit(1);
-	if (pid == 0)
-		if (execve(binary, path ? ft_strstr(path, " ") + 1 : path, g_envars->data) == -1)
+	else if (pid == 0)
+		if (execve(args[0], args, g_envars->data) == -1)
 			return (-1);
-	while ((wpid = wait(&status)) > 0)
+	else
 	{
-		if (pid == wpid)
-			break ;
-		result = check_status(status);
+	    do
+	    {
+	      wpid = waitpid(pid, &status, WUNTRACED);
+	    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	SMART_FREE(binary);
 	return (0);
 }
