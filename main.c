@@ -2,6 +2,16 @@
 
 t_array_wrap *g_envars = NULL;
 
+static void free_double_array(char **array)
+{
+   int   i;
+
+   i = 0;
+   while (array[i])
+      SMART_FREE(array[i++]);
+   SMART_FREE(array);
+}
+
 static void init_setup(char **envp)
 {
 	g_envars = (t_array_wrap*)malloc(sizeof(t_array_wrap));
@@ -12,28 +22,31 @@ static void init_setup(char **envp)
 
 static int parse_commands(char **commands)
 {
-   char *space;
+   char **args;
 
-   space = NULL;
    while (*commands)
    {
+      args = NULL;
       *commands = ft_strtrim(*commands);
-      space = ft_strstr(*commands, " ");
-      if (ft_strncmp(*commands, "env", space - *commands) == 0 && !space)
+      args = ft_strsplit(*commands, ' ');
+      if (ft_strcmp(args[0], "env") == 0 && !args[1])
         print_elements(g_envars);
-      else if (ft_strncmp(*commands, "unset", space - *commands) == 0)
-         ft_unsetenv(space + 1);
-      else if (ft_strncmp(*commands, "export", space - *commands) == 0) //print env if no arguments
-         ft_export(space ? space + 1 : space);
-      else if (ft_strncmp(*commands, "cd", space - *commands) == 0) //print env if no arguments
-         ft_cd(space ? space + 1 : space);
-      else if (ft_strncmp(*commands, "echo", space - *commands) == 0) //print env if no arguments
-         ft_echo(space ? space + 1 : space);
-      else if (ft_strncmp(*commands, "exit", space - *commands) == 0)
-         return (1);
-      else if (ft_run(*commands) == -1)
-         ft_printf("%s : No such file or directory\n", *commands);
+      else if (ft_strcmp(args[0], "unset") == 0)
+         ft_unsetenv_check(args);
+      else if (ft_strcmp(args[0], "export") == 0)
+         ft_setenv_check(args);
+      else if (ft_strcmp(args[0], "cd") == 0)
+         ft_cd(args);
+      else if (ft_strcmp(args[0], "echo") == 0)
+         ft_echo_check(args);
+      else if (ft_strcmp(args[0], "exit") == 0)
+         return (ft_exit(args));
+      else if (ft_strcmp(args[0], "ls") == 0)
+         ft_ls(args);
+      else if (ft_run(args) == -1)
+         ft_printf("--%s: %s: No such file or directory\n", NAME, *commands);
       commands++;
+      //free_double_array(args);
    }
    return (0);
 }
@@ -44,20 +57,23 @@ int main(int argc, char **argv, char **envp)
 	char **commands;
 
 	line = NULL;
-	commands = NULL;
 	init_setup(envp);
 	while (42)
 	{
+      commands = NULL;
       ft_printf(PROMPT);
       get_next_line(0, &line);
       commands = ft_strsplit(line, ';');
       if (parse_commands(commands))
+      {
+         SMART_FREE(line);
+         free_array(g_envars);
          return (0);
-      for (int i = 0; commands[i]; i++)
-         SMART_FREE(commands[i]);
+      }
+      //free_double_array(commands);
       SMART_FREE(line);
 	}
-   	free_array(g_envars);
-   	SMART_FREE(line);
-   	return 0;
+	free_array(g_envars);
+	SMART_FREE(line);
+	return 0;
 }

@@ -12,12 +12,9 @@
 
 #include "minishell.h"
 
-static	void ft_end(int status)
+int	ft_exit(char **args)
 {
-
-}
-
-void	ft_exit()
-{
-
+	if (!args[1])
+		return (1);
+	return (1);
 }

@@ -28,7 +28,7 @@ static char *get_full_path(char *path, char *home)
 	return (ft_strjoin(home, path + 1));
 }
 
-void			ft_cd(char *path)
+void			ft_cd(char **args) //check permisions 
 {
 	char		*old_pwd;
 	char		*buf;
@@ -43,9 +43,9 @@ void			ft_cd(char *path)
 		ft_printf("no OLDPWD or HOME\n"); //ser errno
 		return ;
 	}
-	if (path && path[0] == '~')
-		path = get_full_path(path, home);
-	if (chdir(path ? path : home) < 0)
+	if (args[1] && args[1][0] == '~')
+		args[1] = get_full_path(args[1], home);
+	if (chdir(args[1] ? args[1] : home) < 0)
 	{
 		ft_printf("Can't find path\n"); //set errno
 		return ;

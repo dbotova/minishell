@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	ft_export(char *var)
+static int	ft_export(char *var)
 {
 	char	*name;
 	char	*val;
@@ -37,6 +37,11 @@ int	ft_export(char *var)
 		ft_setenv(name, val, 1);
 	}
 	return (0);
+}
+
+int	ft_setenv_check(char **args)
+{
+	return (ft_export(args[1]));
 }
 
 int		ft_setenv(char *name, char *value, int overwrite) //don't change OLDPWD if path is a current dir

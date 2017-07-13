@@ -10,15 +10,20 @@
 # define MAGIC_NUMBER 42
 # define PROMPT ">> "
 # define DQUOTE "<dquote> "
+# define NAME "minishell"
 
 extern t_array_wrap *g_envars;
 
 int		ft_setenv(char *name, char *value, int overwrite);
 int		ft_unsetenv(char *name);
-void	ft_cd(char *path);
+void	ft_cd(char **args);
 int		ft_echo(char *line);
-int		ft_export(char *var);
-void	ft_exit(void);
-int		ft_run(char *path);
+int		ft_exit(char **args);
+int		ft_run(char **args);
+void	ft_ls(char **args);
+
+int		ft_setenv_check(char **args);
+int		ft_unsetenv_check(char **args);
+int		ft_echo_check(char **args);
 
 #endif

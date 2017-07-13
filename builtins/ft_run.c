@@ -12,23 +12,23 @@
 
 #include "minishell.h"
 
-int	ft_run(char *path)
+int	ft_run(char **args)
 {
 	pid_t	pid;
 	pid_t	wpid;
 	int 	status;
-	char	**args;
 
 	pid = 0;
 	wpid = 0;
 	status = 0;
-	args = ft_strsplit(path, ' ');
 	if ((pid = fork()) < 0)
 		exit(1);
 	else if (pid == 0)
+	{
 		if (execve(args[0], args, g_envars->data) == -1)
 			return (-1);
-	else
+	}
+	else // replace do...while
 	{
 	    do
 	    {

@@ -46,6 +46,11 @@ static void	ft_dquote(t_array_wrap *lines)
 	}
 }
 
+int ft_echo_check(char **args)
+{
+	return (ft_echo(args[1]));
+}
+
 int	ft_echo(char *path)
 {
 	t_array_wrap *lines;

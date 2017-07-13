@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unsetenv.c                                      :+:      :+:    :+:   */
+/*   ft_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dz <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/25 13:14:11 by dz                #+#    #+#             */
-/*   Updated: 2017/05/25 13:14:13 by dz               ###   ########.fr       */
+/*   Created: 2017/07/12 13:42:32 by dz                #+#    #+#             */
+/*   Updated: 2017/07/12 13:42:34 by dz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_unsetenv_check(char **args)
+void	ft_ls(char **args)
 {
-	return (ft_unsetenv(args[1]));
-}
+	pid_t	pid;
+	pid_t	wpid;
+	int		status;
 
-int		ft_unsetenv(char *name)
-{
-	return (delete_element(g_envars, name));
+	pid = 0;
+	wpid = 0;
+	status = 0;
+	if ((pid = fork()) < 0)
+		exit(1);
+	else if (pid == 0)
+	{
+		if (execve("/bin/ft_ls", args, g_envars->data) == -1)
+			return ; //set errno
+	}
+	else // replace do...while
+	{
+	    do
+	    {
+	      wpid = waitpid(pid, &status, WUNTRACED);
+	    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+	}
 }
