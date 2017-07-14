@@ -25,7 +25,7 @@ void	ft_ls(char **args)
 		exit(1);
 	else if (pid == 0)
 	{
-		if (execve("/bin/ft_ls", args, g_envars->data) == -1)
+		if (execve("bin/ft_ls", args, g_envars->data) == -1)
 			return ; //set errno
 	}
 	else // replace do...while

@@ -91,5 +91,6 @@ char		**ft_strsplit(char const *s, char c)
 		}
 		idx++;
 	}
+	result[malloc_size] = NULL;
 	return (result);
 }

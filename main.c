@@ -2,13 +2,14 @@
 
 t_array_wrap *g_envars = NULL;
 
-static void free_double_array(char **array)
+static void free_double_array(char **array) //replace for loop
 {
-   int   i;
+   //int i;
 
-   i = 0;
-   while (array[i])
-      SMART_FREE(array[i++]);
+   //i = 0;
+   for (int i = 0; array[i]; i++)
+   //while (array[i])
+      SMART_FREE(array[i]);
    SMART_FREE(array);
 }
 
@@ -20,6 +21,31 @@ static void init_setup(char **envp)
    	system("clear");
 }
 
+static char **get_args(char *command)
+{
+   char **args;
+   char  *options;
+
+   args = (char**)malloc(sizeof(char*) * 3);
+   options = ft_strchr(command, ' ');
+   if (options)
+   {
+      options++;
+      args[0] = (char*)malloc(sizeof(char) * (options - command));
+      args[0] = ft_strncpy(args[0], command, options - command - 1);
+      args[0][options - command] = 0;
+      args[1] = ft_strdup(options);
+   }
+   else
+   {
+      args[0] = ft_strdup(command);
+      args[1] = NULL;
+   }
+   args[2] = NULL;
+   return (args);
+
+}
+
 static int parse_commands(char **commands)
 {
    char **args;
@@ -28,7 +54,8 @@ static int parse_commands(char **commands)
    {
       args = NULL;
       *commands = ft_strtrim(*commands);
-      args = ft_strsplit(*commands, ' ');
+      //args = ft_strsplit(*commands, ' ');
+      args = get_args(*commands);
       if (ft_strcmp(args[0], "env") == 0 && !args[1])
         print_elements(g_envars);
       else if (ft_strcmp(args[0], "unset") == 0)
@@ -46,7 +73,7 @@ static int parse_commands(char **commands)
       else if (ft_run(args) == -1)
          ft_printf("--%s: %s: No such file or directory\n", NAME, *commands);
       commands++;
-      //free_double_array(args);
+      free_double_array(args);
    }
    return (0);
 }
@@ -70,7 +97,7 @@ int main(int argc, char **argv, char **envp)
          free_array(g_envars);
          return (0);
       }
-      //free_double_array(commands);
+      free_double_array(commands);
       SMART_FREE(line);
 	}
 	free_array(g_envars);
