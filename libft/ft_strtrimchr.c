@@ -21,8 +21,8 @@ void		ft_strtrimchr(char *str, char c)
 	len = 0;
 	while ((match = ft_strchr(str, c)))
 	{
-		len = ft_strlen(match) - 1; /* minus 1 for found qoute */
-		match[0] = 0; /* delete found qoute */
+		len = ft_strlen(match) - 1; /* minus 1 for found symbol */
+		match[0] = 0; /* delete found symbol */
 		ft_strcat(match, match + 1);
 		str += match - str;
 	}

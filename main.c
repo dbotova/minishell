@@ -2,14 +2,16 @@
 
 t_array_wrap *g_envars = NULL;
 
-static void free_double_array(char **array) //replace for loop
+static void free_double_array(char **array)
 {
-   //int i;
+   int i;
 
-   //i = 0;
-   for (int i = 0; array[i]; i++)
-   //while (array[i])
+   i = 0;
+   while (array[i])
+   {
       SMART_FREE(array[i]);
+      i++;
+   }
    SMART_FREE(array);
 }
 
@@ -32,8 +34,8 @@ static char **get_args(char *command)
    {
       options++;
       args[0] = (char*)malloc(sizeof(char) * (options - command));
+      ft_memset(args[0], 0, sizeof(char) * (options - command));
       args[0] = ft_strncpy(args[0], command, options - command - 1);
-      args[0][options - command] = 0;
       args[1] = ft_strdup(options);
    }
    else
@@ -49,13 +51,13 @@ static char **get_args(char *command)
 static int parse_commands(char **commands)
 {
    char **args;
+   char  *cur_command;
 
    while (*commands)
    {
-      args = NULL;
-      *commands = ft_strtrim(*commands);
-      //args = ft_strsplit(*commands, ' ');
-      args = get_args(*commands);
+      cur_command = ft_strtrim(*commands); //memory leak
+      args = get_args(cur_command);
+      SMART_FREE(cur_command);
       if (ft_strcmp(args[0], "env") == 0 && !args[1])
         print_elements(g_envars);
       else if (ft_strcmp(args[0], "unset") == 0)
@@ -71,7 +73,10 @@ static int parse_commands(char **commands)
       else if (ft_strcmp(args[0], "ls") == 0)
          ft_ls(args);
       else if (ft_run(args) == -1)
-         ft_printf("--%s: %s: No such file or directory\n", NAME, *commands);
+      {
+         ft_putstr_fd("No such file or directory\n", 2);
+         //ft_printf("--%s: %s: No such file or directory\n", NAME, *commands);
+      }
       commands++;
       free_double_array(args);
    }
@@ -87,16 +92,11 @@ int main(int argc, char **argv, char **envp)
 	init_setup(envp);
 	while (42)
 	{
-      commands = NULL;
       ft_printf(PROMPT);
       get_next_line(0, &line);
       commands = ft_strsplit(line, ';');
       if (parse_commands(commands))
-      {
-         SMART_FREE(line);
-         free_array(g_envars);
-         return (0);
-      }
+         break ;
       free_double_array(commands);
       SMART_FREE(line);
 	}
