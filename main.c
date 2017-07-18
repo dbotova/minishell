@@ -2,7 +2,7 @@
 
 t_array_wrap *g_envars = NULL;
 
-static void free_double_array(char **array)
+static void free_double_array(char **array) //move to libft
 {
    int i;
 
@@ -48,6 +48,28 @@ static char **get_args(char *command)
 
 }
 
+static int hash_key(char *str)
+{
+   int key = 0;
+   while (*str)
+      key += *str++;
+   return ((key / 10) - (key % 10));
+}
+
+static void debug(void)
+{
+   ft_printf("env: %d\n", hash_key("env"));
+   ft_printf("unset: %d\n", hash_key("unset"));
+   ft_printf("export: %d\n", hash_key("export"));
+   ft_printf("cd: %d\n", hash_key("cd"));
+   ft_printf("pwd: %d\n", hash_key("pwd"));
+   ft_printf("echo: %d\n", hash_key("echo"));
+   ft_printf("exit: %d\n", hash_key("exit"));
+   ft_printf("ls: %d\n", hash_key("ls"));
+
+   ft_printf("cat: %d\n", hash_key("cat"));
+}
+
 static int parse_commands(char **commands)
 {
    char **args;
@@ -55,7 +77,7 @@ static int parse_commands(char **commands)
 
    while (*commands)
    {
-      cur_command = ft_strtrim(*commands); //memory leak
+      cur_command = ft_strtrim(*commands);
       args = get_args(cur_command);
       SMART_FREE(cur_command);
       if (ft_strcmp(args[0], "env") == 0 && !args[1])
@@ -70,26 +92,28 @@ static int parse_commands(char **commands)
          ft_echo_check(args);
       else if (ft_strcmp(args[0], "exit") == 0)
          return (ft_exit(args));
+      else if (ft_strcmp(args[0], "pwd") == 0)
+         ft_pwd(args);
+      else if (ft_strcmp(args[0], "debug") == 0) //remove
+         debug();
       else if (ft_strcmp(args[0], "ls") == 0)
          ft_ls(args);
       else if (ft_run(args) == -1)
-      {
          ft_putstr_fd("No such file or directory\n", 2);
-         //ft_printf("--%s: %s: No such file or directory\n", NAME, *commands);
-      }
       commands++;
       free_double_array(args);
    }
    return (0);
 }
 
-int main(int argc, char **argv, char **envp)
+int main(void)
 {
 	char *line;
 	char **commands;
+   extern char **environ;
 
 	line = NULL;
-	init_setup(envp);
+   init_setup(environ);
 	while (42)
 	{
       ft_printf(PROMPT);

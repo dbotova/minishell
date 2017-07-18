@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   ft_chkpermissio.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dz <marvin@42.fr>                          +#+  +:+       +#+        */
+/*   By: dbotova <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/12 13:42:32 by dz                #+#    #+#             */
-/*   Updated: 2017/07/12 13:42:34 by dz               ###   ########.fr       */
+/*   Created: 2017/07/18 11:01:03 by dbotova           #+#    #+#             */
+/*   Updated: 2017/07/18 11:01:05 by dbotova          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_ls(char **args) //fix path to the binary
+int		check_permission(char *path, int mode)
 {
-	SMART_FREE(args[0]);
-	args[0] = ft_strdup("bin/ft_ls");
-	ft_run(args);
+	if (!access(path, F_OK) && !access(path, mode))
+		return (0);
+	return (-1);
 }

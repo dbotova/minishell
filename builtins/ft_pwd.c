@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dz <marvin@42.fr>                          +#+  +:+       +#+        */
+/*   By: dbotova <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/12 13:42:32 by dz                #+#    #+#             */
-/*   Updated: 2017/07/12 13:42:34 by dz               ###   ########.fr       */
+/*   Created: 2017/07/18 14:43:12 by dbotova           #+#    #+#             */
+/*   Updated: 2017/07/18 14:43:13 by dbotova          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_ls(char **args) //fix path to the binary
+void	ft_pwd(char **args)
 {
-	SMART_FREE(args[0]);
-	args[0] = ft_strdup("bin/ft_ls");
-	ft_run(args);
+	if (!args[1])
+		ft_printf("%s\n", ft_getenv("PWD"));
 }

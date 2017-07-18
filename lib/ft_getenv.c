@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dz <marvin@42.fr>                          +#+  +:+       +#+        */
+/*   By: dbotova <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/12 13:42:32 by dz                #+#    #+#             */
-/*   Updated: 2017/07/12 13:42:34 by dz               ###   ########.fr       */
+/*   Created: 2017/07/18 10:53:53 by dbotova           #+#    #+#             */
+/*   Updated: 2017/07/18 10:53:54 by dbotova          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_ls(char **args) //fix path to the binary
+char		*ft_getenv(char *item)
 {
-	SMART_FREE(args[0]);
-	args[0] = ft_strdup("bin/ft_ls");
-	ft_run(args);
+	char	*val;
+	ssize_t	i;
+
+	val = NULL;
+	i = find_element(g_envars, item, ft_strlen(item), '=');
+	if (i >= 0)
+		val = ft_strstr(g_envars->data[i], "=") + 1;
+	return (val);
 }

@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 BUILTINS = builtins
+LIB = lib
 
 OBJS =	main.o 						\
 		$(BUILTINS)/ft_setenv.o 	\
@@ -19,7 +20,10 @@ OBJS =	main.o 						\
 		$(BUILTINS)/ft_echo.o 		\
 		$(BUILTINS)/ft_exit.o 		\
 		$(BUILTINS)/ft_run.o 		\
-		$(BUILTINS)/ft_ls.o
+		$(BUILTINS)/ft_ls.o 		\
+		$(BUILTINS)/ft_pwd.o 		\
+		$(LIB)/ft_getenv.o 			\
+		$(LIB)/ft_chkpermission.o
 
 LIBFT = ./libft/libft.a
 
@@ -27,8 +31,8 @@ LIBS= $(LIBFT)
 
 HEADERS = minishell.h ./libft/libft.h
 
-#CFLAGS += -Wall -Werror -Wextra -g -O0
-CFLAGS += -g -O0 -I.
+CFLAGS += -Wall -Werror -Wextra -g -O0
+#CFLAGS += -g -O0 -I.
 
 NAME = minishell
 

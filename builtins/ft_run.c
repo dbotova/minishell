@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_run(char **args)
 {
@@ -21,6 +21,8 @@ int	ft_run(char **args)
 	pid = 0;
 	wpid = 0;
 	status = 0;
+	if (check_permission(args[0], X_OK) != 0)
+		return (-1);
 	if ((pid = fork()) < 0)
 		exit(1);
 	else if (pid == 0)
