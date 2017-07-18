@@ -26,7 +26,7 @@ int	ft_run(char **args)
 	else if (pid == 0)
 	{
 		if (execve(args[0], args, g_envars->data) == -1)
-			return (-1);
+			exit(2);
 	}
 	else // replace do...while
 	{
@@ -35,5 +35,5 @@ int	ft_run(char **args)
 	      wpid = waitpid(pid, &status, WUNTRACED);
 	    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	return (0);
+	return ((WEXITSTATUS(status) == 2) ? -1 : 0);
 }

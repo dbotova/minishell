@@ -95,9 +95,12 @@ int main(int argc, char **argv, char **envp)
       ft_printf(PROMPT);
       get_next_line(0, &line);
       commands = ft_strsplit(line, ';');
-      if (parse_commands(commands))
-         break ;
-      free_double_array(commands);
+      if (commands)
+      {  
+         if (parse_commands(commands))
+            break ;
+         free_double_array(commands);
+      }
       SMART_FREE(line);
 	}
 	free_array(g_envars);

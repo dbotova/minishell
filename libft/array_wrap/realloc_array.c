@@ -24,10 +24,7 @@ t_array_wrap		*realloc_array(t_array_wrap *array, size_t new_size)
 	array->data = (char**)malloc(sizeof(char*) * new_size);
 	array->size = new_size;
 	while (i < new_size)
-	{
-		array->data[i] = (char*)malloc(sizeof(char) * PATH_MAX);
-		ft_memset(array->data[i++], 0, sizeof(char) * PATH_MAX);
-	}
+		array->data[i++] = NULL;
 	ft_memcpy(array->data, old_data, sizeof(char*) * old_size);
 	SMART_FREE(old_data);
 	return (array);

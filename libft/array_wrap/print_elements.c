@@ -19,7 +19,7 @@ void		print_elements(t_array_wrap *array)
 	i = 0;
 	while (i < array->used)
 	{
-		if (array->data[i][0] != 0)
+		if (array->data[i])
 			ft_printf("%s\n", array->data[i]);
 		i++;
 	}

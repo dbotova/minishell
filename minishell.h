@@ -7,6 +7,7 @@
 # include <unistd.h>
 # include <sys/stat.h>
 # include <signal.h>
+# include <errno.h> //remove
 # define MAGIC_NUMBER 42
 # define PROMPT ">> "
 # define DQUOTE "<dquote> "

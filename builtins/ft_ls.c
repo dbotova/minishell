@@ -14,25 +14,7 @@
 
 void	ft_ls(char **args)
 {
-	pid_t	pid;
-	pid_t	wpid;
-	int		status;
-
-	pid = 0;
-	wpid = 0;
-	status = 0;
-	if ((pid = fork()) < 0)
-		exit(1);
-	else if (pid == 0)
-	{
-		if (execve("bin/ft_ls", args, g_envars->data) == -1)
-			return ; //set errno
-	}
-	else // replace do...while
-	{
-	    do
-	    {
-	      wpid = waitpid(pid, &status, WUNTRACED);
-	    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
-	}
+	SMART_FREE(args[0]);
+	args[0] = ft_strdup("bin/ft_ls");
+	ft_run(args);
 }

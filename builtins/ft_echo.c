@@ -57,6 +57,11 @@ int	ft_echo(char *path)
 	size_t		i;
 
 	i = 0;
+	if (!path)
+	{
+		ft_printf("\n");
+		return (0);
+	}
 	lines = (t_array_wrap*)malloc(sizeof(t_array_wrap));
 	init_array(&lines, SIZE_BLOCK);
 	add_element(lines, path);

@@ -47,8 +47,8 @@ void			ft_cd(char **args) //check permisions
 		args[1] = get_full_path(args[1], home);
 	if (chdir(args[1] ? args[1] : home) < 0)
 	{
-		ft_putstr_fd("No such file or directory\n", 2);
-		//ft_printf("Can't find path: %s or %s\n", args[1], home); //set errno
+		//ft_putstr_fd("No such file or directory\n", 2);
+		ft_printf("Can't find path: %s or %s\n", args[1], home); //set errno
 		return ;
 	}
 	if (!getcwd(buf, PATH_MAX))

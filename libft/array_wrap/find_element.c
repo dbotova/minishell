@@ -21,7 +21,7 @@ ssize_t				find_element(t_array_wrap *array, char *item, size_t len, char symb)
 	i = 0;
 	while (i < array->used)
 	{
-		if (hash(array->data[i], len) == key)
+		if (array->data[i] && hash(array->data[i], len) == key)
 			if (ft_strncmp(array->data[i], item, len) == 0 &&
 				array->data[i][len] == symb)
 				return (i);

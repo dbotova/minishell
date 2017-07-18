@@ -26,7 +26,10 @@ static int	ft_export(char *var)
 	else
 	{
 		name = var;
-		val = ft_strstr(var, "=") + 1; //check for format
+		val = ft_strstr(var, "=");
+		if (!val)
+			return (-1);
+		val++;
 		val_len = ft_strlen(val);
 		name[val - var - 1] = 0;
 		if (val[0] == '"' && val[val_len - 1] == '"') //check ending qoute 
