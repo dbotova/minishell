@@ -12,12 +12,7 @@
 
 #include "../minishell.h"
 
-static char *get_full_path(char *path, char *home)
-{
-	return (ft_strjoin(home, path + 1));
-}
-
-void			ft_cd(char **args) //check permisions 
+void			ft_cd(char **args) //relative path; cd -
 {
 	char		*old_pwd;
 	char		*buf;
@@ -31,10 +26,10 @@ void			ft_cd(char **args) //check permisions
 		return ;
 	}
 	if (args[1] && args[1][0] == '~')
-		args[1] = get_full_path(args[1], home);
+		args[1] = ft_get_full_path(args[1] + 1, home);
 	if (args[1] && ft_strcmp(old_pwd, args[1]) == 0)
 		return ;
-	if (args[1] && check_permission(args[1], R_OK) != 0)
+	if (args[1] && ft_check_permission(args[1], R_OK) != 0)
 	{
 		ft_putstr_fd("Permission denied\n", 2);
 		return ;

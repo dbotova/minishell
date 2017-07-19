@@ -20,10 +20,9 @@ OBJS =	main.o 						\
 		$(BUILTINS)/ft_echo.o 		\
 		$(BUILTINS)/ft_exit.o 		\
 		$(BUILTINS)/ft_run.o 		\
-		$(BUILTINS)/ft_ls.o 		\
-		$(BUILTINS)/ft_pwd.o 		\
 		$(LIB)/ft_getenv.o 			\
-		$(LIB)/ft_chkpermission.o
+		$(LIB)/ft_chkpermission.o 	\
+		$(LIB)/ft_get_full_path.o
 
 LIBFT = ./libft/libft.a
 

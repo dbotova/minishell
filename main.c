@@ -1,6 +1,7 @@
 #include "minishell.h"
 
-t_array_wrap *g_envars = NULL;
+t_array_wrap   *g_envars = NULL;
+char           **g_paths = NULL;
 
 static void free_double_array(char **array) //move to libft
 {
@@ -15,12 +16,14 @@ static void free_double_array(char **array) //move to libft
    SMART_FREE(array);
 }
 
-static void init_setup(char **envp)
+static void init_setup()
 {
+   extern char **environ;
+
 	g_envars = (t_array_wrap*)malloc(sizeof(t_array_wrap));
 	init_array(&g_envars, SIZE_BLOCK);
-   	copy_array(g_envars, envp);
-   	system("clear");
+	copy_array(g_envars, environ);
+	system("clear");
 }
 
 static char **get_args(char *command)
@@ -70,6 +73,15 @@ static void debug(void)
    ft_printf("cat: %d\n", hash_key("cat"));
 }
 
+static   char *ft_append_path(char *location, char *name)
+{
+   char *result;
+
+   result = ft_strjoin(location, "/");
+   result = ft_strjoin(result, name);
+   return (result);
+}
+
 static int parse_commands(char **commands)
 {
    char **args;
@@ -92,14 +104,24 @@ static int parse_commands(char **commands)
          ft_echo_check(args);
       else if (ft_strcmp(args[0], "exit") == 0)
          return (ft_exit(args));
-      else if (ft_strcmp(args[0], "pwd") == 0)
-         ft_pwd(args);
       else if (ft_strcmp(args[0], "debug") == 0) //remove
          debug();
-      else if (ft_strcmp(args[0], "ls") == 0)
-         ft_ls(args);
-      else if (ft_run(args) == -1)
-         ft_putstr_fd("No such file or directory\n", 2);
+      else //fix all leaks and clean up
+      {
+         int result = -1;
+         char *old = ft_strdup(args[0]);
+         for (int i = 0; g_paths[i]; i++)
+         {
+            if (result == 0)
+               break ;
+            SMART_FREE(args[0]);
+            args[0] = ft_strdup(ft_append_path(g_paths[i], old));
+            result = ft_run(args);
+         }
+         if (result == -1)
+            ft_putstr_fd("No such file or directory\n", 2);
+         SMART_FREE(old);
+      }
       commands++;
       free_double_array(args);
    }
@@ -110,20 +132,23 @@ int main(void)
 {
 	char *line;
 	char **commands;
-   extern char **environ;
 
-	line = NULL;
-   init_setup(environ);
+   init_setup();
+   line = NULL;
+   commands = NULL;
 	while (42)
 	{
       ft_printf(PROMPT);
       get_next_line(0, &line);
       commands = ft_strsplit(line, ';');
+      g_paths = ft_strsplit(ft_getenv("PATH"), ':');
       if (commands)
       {  
          if (parse_commands(commands))
             break ;
          free_double_array(commands);
+         if (g_paths)
+            free_double_array(g_paths);
       }
       SMART_FREE(line);
 	}

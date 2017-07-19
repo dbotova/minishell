@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	ft_run(char **args)
+int	ft_run(char **args) //fix args
 {
 	pid_t	pid;
 	pid_t	wpid;
@@ -21,7 +21,7 @@ int	ft_run(char **args)
 	pid = 0;
 	wpid = 0;
 	status = 0;
-	if (check_permission(args[0], X_OK) != 0)
+	if (ft_check_permission(args[0], X_OK) != 0)
 		return (-1);
 	if ((pid = fork()) < 0)
 		exit(1);

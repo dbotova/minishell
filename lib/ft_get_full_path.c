@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   get_full_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbotova <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/18 14:43:12 by dbotova           #+#    #+#             */
-/*   Updated: 2017/07/18 14:43:13 by dbotova          ###   ########.fr       */
+/*   Created: 2017/07/18 17:50:06 by dbotova           #+#    #+#             */
+/*   Updated: 2017/07/18 17:50:07 by dbotova          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_pwd(char **args)
+char *ft_get_full_path(char *path, char *name)
 {
-	if (!args[1])
-		ft_printf("%s\n", ft_getenv("PWD"));
+	return (ft_strjoin(name, path));
 }
