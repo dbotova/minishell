@@ -53,7 +53,8 @@ SRC =	libft.h																\
 		$(ARRAY)/edit_element.c $(ARRAY)/find_element.c 					\
 		$(ARRAY)/free_array.c $(ARRAY)/init_array.c 						\
 		$(ARRAY)/print_elements.c $(ARRAY)/realloc_array.c 					\
-		ft_strtrimchr.c
+		$(ARRAY)/str_to_array.c 											\
+		ft_strtrimchr.c free_double_array.c
 
 OBJ = 	ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o			\
 		ft_isdigit.o ft_isprint.o ft_ispunct.o ft_isspace.o ft_itoa.o		\
@@ -84,7 +85,8 @@ OBJ = 	ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o			\
 		ft_newflagslst.o ft_num_separete.o ft_itoa_base.o get_next_word.o 	\
 		ft_hash.o add_element.o copy_array.o delete_element.o 				\
 		edit_element.o find_element.o free_array.o init_array.o 			\
-		print_elements.o realloc_array.o ft_strtrimchr.o
+		print_elements.o realloc_array.o ft_strtrimchr.o str_to_array.o 	\
+		free_double_array.o
 
 NAME = libft.a
 

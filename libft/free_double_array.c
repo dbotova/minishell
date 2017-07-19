@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_elements.c                                   :+:      :+:    :+:   */
+/*   free_double_array.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbotova <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dz <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/21 17:36:21 by dbotova           #+#    #+#             */
-/*   Updated: 2017/05/21 17:36:22 by dbotova          ###   ########.fr       */
+/*   Created: 2017/07/18 21:45:21 by dz                #+#    #+#             */
+/*   Updated: 2017/07/18 21:45:22 by dz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_wrap.h"
+#include "libft.h"
 
-void		print_elements(t_array_wrap *array)
+void	free_double_array(char **array)
 {
-	size_t	i;
+   int i;
 
-	i = 0;
-	if (!array)
-		return ;
-	while (i < array->used)
-	{
-		if (array->data[i])
-			ft_printf("%s\n", array->data[i]);
-		i++;
-	}
+   i = 0;
+   if (!array)
+      return ;
+   while (array[i])
+   {
+      SMART_FREE(array[i]);
+      i++;
+   }
+   SMART_FREE(array);
 }

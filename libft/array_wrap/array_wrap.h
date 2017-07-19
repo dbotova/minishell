@@ -13,7 +13,7 @@
 #ifndef ARRAY_WRAP_H
 # define ARRAY_WRAP_H
 # include "../libft.h"
-# define SIZE_BLOCK 10
+# define SIZE_BLOCK 20
 
 typedef struct	s_array_wrap
 {
@@ -29,7 +29,8 @@ void			add_element(t_array_wrap *array, char *new_item);
 void			edit_element(t_array_wrap *array, char *item, char *value, char symb);
 ssize_t			find_element(t_array_wrap *array, char *item, size_t len, char symb);
 void			print_elements(t_array_wrap *array);
-int			delete_element(t_array_wrap *array, char *element);
+int				delete_element(t_array_wrap *array, char *element);
 void			copy_array(t_array_wrap *array, char **elements);
+void			str_to_array(t_array_wrap **array, char *str, char c);
 
 #endif

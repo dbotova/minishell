@@ -1,26 +1,12 @@
 #include "minishell.h"
 
 t_array_wrap   *g_envars = NULL;
-char           **g_paths = NULL;
-
-static void free_double_array(char **array) //move to libft
-{
-   int i;
-
-   i = 0;
-   while (array[i])
-   {
-      SMART_FREE(array[i]);
-      i++;
-   }
-   SMART_FREE(array);
-}
+t_array_wrap   *g_paths = NULL;
 
 static void init_setup()
 {
    extern char **environ;
 
-	g_envars = (t_array_wrap*)malloc(sizeof(t_array_wrap));
 	init_array(&g_envars, SIZE_BLOCK);
 	copy_array(g_envars, environ);
 	system("clear");
@@ -110,16 +96,23 @@ static int parse_commands(char **commands)
       {
          int result = -1;
          char *old = ft_strdup(args[0]);
-         for (int i = 0; g_paths[i]; i++)
+         if (!g_paths)
+            break ;
+         for (int i = 0; g_paths->data[i]; i++)
          {
             if (result == 0)
                break ;
             SMART_FREE(args[0]);
-            args[0] = ft_strdup(ft_append_path(g_paths[i], old));
+            args[0] = ft_strdup(ft_append_path(g_paths->data[i], old));
             result = ft_run(args);
          }
          if (result == -1)
-            ft_putstr_fd("No such file or directory\n", 2);
+         {
+            SMART_FREE(args[0]);
+            args[0] = ft_strdup(old);
+            if (ft_run(args) == -1)
+               ft_putstr_fd("No such file or directory\n", 2);
+         }
          SMART_FREE(old);
       }
       commands++;
@@ -141,14 +134,14 @@ int main(void)
       ft_printf(PROMPT);
       get_next_line(0, &line);
       commands = ft_strsplit(line, ';');
-      g_paths = ft_strsplit(ft_getenv("PATH"), ':');
+      str_to_array(&g_paths, ft_getenv("PATH"), ':');
       if (commands)
       {  
          if (parse_commands(commands))
             break ;
          free_double_array(commands);
-         if (g_paths)
-            free_double_array(g_paths);
+         free_array(g_paths);
+         g_paths = NULL;
       }
       SMART_FREE(line);
 	}

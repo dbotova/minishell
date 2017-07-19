@@ -17,6 +17,8 @@ void				free_array(t_array_wrap *array)
 	size_t			i;
 
 	i = 0;
+	if (!array)
+		return ;
 	while (i < array->size)
 	{
 		if (array->data[i])

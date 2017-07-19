@@ -12,7 +12,7 @@
 # define NAME "minishell"
 
 extern t_array_wrap *g_envars;
-extern char			**g_paths;
+extern t_array_wrap	*g_paths;
 
 int		ft_setenv(char *name, char *value, int overwrite);
 int		ft_unsetenv(char *name);
