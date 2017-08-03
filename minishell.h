@@ -27,5 +27,6 @@ int		ft_echo_check(char **args);
 char	*ft_getenv(char *item);
 int		ft_check_permission(char *path, int mode);
 char 	*ft_get_full_path(char *path, char *name);
+char	*ft_realpath(const char *path, char *resolved_path);
 
 #endif

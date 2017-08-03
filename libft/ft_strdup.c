@@ -18,8 +18,11 @@ char	*ft_strdup(const char *string)
 	char	*result;
 
 	len = 0;
+	if (!string)
+		return (NULL);
 	len = (int)ft_strlen(string);
 	result = (char *)malloc(sizeof(char) * (len + 1));
+	ft_bzero(result, len + 1);
 	if (result)
 		result = ft_strcpy(result, string);
 	return (result);

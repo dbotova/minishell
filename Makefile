@@ -22,7 +22,8 @@ OBJS =	main.o 						\
 		$(BUILTINS)/ft_run.o 		\
 		$(LIB)/ft_getenv.o 			\
 		$(LIB)/ft_chkpermission.o 	\
-		$(LIB)/ft_get_full_path.o
+		$(LIB)/ft_get_full_path.o 	\
+		$(LIB)/ft_realpath.o
 
 LIBFT = ./libft/libft.a
 
