@@ -14,7 +14,7 @@
 
 int		ft_check_permission(char *path, int mode)
 {
-	if (!access(path, F_OK) && !access(path, mode))
+	if (!access(path, mode))
 		return (0);
 	return (-1);
 }

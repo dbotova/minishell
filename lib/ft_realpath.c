@@ -24,19 +24,15 @@ static char *remove_relative_path(char *path, char **resolved_path, char *name)
 	else
 	{
 		ft_strcpy(*resolved_path, absolute_path);
-		ft_strcpy(*resolved_path, path);
+		ft_strcat(*resolved_path, path);
 	}
 	return (*resolved_path);
 }
 
-char	*ft_realpath(const char *path, char *resolved_path)
+static	char *pre_remove(const char *path, char *resolved_path)
 {
-	char	*level_up;
-	char	*tmp;
 	char	*rpath;
 
-	level_up = NULL;
-	tmp = NULL;
 	rpath = NULL;
 	rpath = ft_strdup(path);
 	if (!resolved_path)
@@ -49,16 +45,32 @@ char	*ft_realpath(const char *path, char *resolved_path)
 		return (NULL);
 	if (rpath && ft_strncmp(rpath, "..", 2) == 0 && !remove_relative_path(rpath, &resolved_path, "PWD"))
 		return (NULL);
-	while ((level_up = ft_strstr(resolved_path, "../"))) //zero and strcat
+	if (*resolved_path == 0)
+		ft_strcpy(resolved_path, path);
+	SMART_FREE(rpath);
+	return (resolved_path);
+}
+
+char	*ft_realpath(const char *path, char *resolved_path)
+{
+	char	*level_up;
+	char	*tmp;
+
+	level_up = NULL;
+	tmp = NULL;
+	if (!pre_remove(path, resolved_path))
+		return (NULL);
+	while ((level_up = ft_strstr(resolved_path, "..")))
 	{
-		tmp = level_up;
+		tmp = level_up - 1;
+		if (*tmp == '/')
+			*tmp-- = 0;
 		while (*tmp != '/' && tmp != resolved_path)
 			*tmp-- = 0;
 		while (*level_up && *level_up != '/')
 			*level_up++ = 0;
-		ft_strcat(tmp, level_up);
+		ft_strcat(tmp, ++level_up);
 	}
-	SMART_FREE(rpath);
 	return (resolved_path);
 }
 
