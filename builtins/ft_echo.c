@@ -51,7 +51,7 @@ int ft_echo_check(char **args)
 	return (ft_echo(args[1]));
 }
 
-int	ft_echo(char *path) //evar value
+int	ft_echo(char *path) //evar value refactor with dequeue
 {
 	t_array_wrap *lines;
 	size_t		i;

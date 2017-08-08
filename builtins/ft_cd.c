@@ -12,7 +12,8 @@
 
 #include "../minishell.h"
 
-static	char			*get_pwd(char *path, char *resolved_path)
+static	char			*get_pwd(char *path, char *resolved_path,
+						char *cur_pwd)
 {
 	if (!ft_realpath(path, resolved_path))
 	{
@@ -24,6 +25,8 @@ static	char			*get_pwd(char *path, char *resolved_path)
 		ft_putstr_fd("Permission denied\n", 2);
 		return (NULL);
 	}
+	if (ft_strcmp(cur_pwd, resolved_path) == 0)
+		return (NULL);
 	return (resolved_path);
 }
 
@@ -49,6 +52,13 @@ static void	undo(char *resolved_path, char *cur_pwd)
 	ft_lstdelone(&old_pwd, ft_del);
 }
 
+static void				update(char *cur_pwd, char *buf)
+{
+	ft_setenv("OLDPWD", cur_pwd, 1);
+	ft_push(&g_cd_history, cur_pwd, ft_strlen(cur_pwd));
+	ft_setenv("PWD", buf, 1);
+}
+
 void					ft_cd(char **args)
 {
 	char				*cur_pwd;
@@ -67,9 +77,7 @@ void					ft_cd(char **args)
 		undo(resolved_path, cur_pwd);
 		return ;
 	}
-	if (!get_pwd(args[1], resolved_path))
-		return ;
-	if (ft_strcmp(cur_pwd, resolved_path) == 0)
+	if (!get_pwd(args[1], resolved_path, cur_pwd))
 		return ;
 	if (chdir(resolved_path) < 0)
 	{
@@ -78,7 +86,5 @@ void					ft_cd(char **args)
 	}
 	if (!getcwd(buf, PATH_MAX))
 		return ;
-	ft_setenv("OLDPWD", cur_pwd, 1);
-	ft_push(&g_cd_history, cur_pwd, ft_strlen(cur_pwd));
-	ft_setenv("PWD", buf, 1);
+	update(cur_pwd, buf);
 }

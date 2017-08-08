@@ -19,9 +19,10 @@ UPATH =		./$(PRINTF)/util
 STACK =		./stack
 STR =		./str
 MEM =		./mem
+QUEUE =		./queue
 
 HEADERS =	libft.h $(LLIST)/llist.h $(STACK)/stack.h $(STR)/str.h $(MEM)/mem.h \
-			$(PRINTF)/ft_printf.h
+			$(PRINTF)/ft_printf.h $(QUEUE)/queue.h
 
 SRC =	ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c					\
 		ft_isdigit.c ft_isprint.c ft_ispunct.c ft_isspace.c ft_itoa.c		\
@@ -69,7 +70,9 @@ SRC =	ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c					\
 		$(ARRAY)/print_elements.c $(ARRAY)/realloc_array.c 					\
 		$(ARRAY)/str_to_array.c $(ARRAY)/add_element.c						\
 		$(STR)/ft_strtrimchr.c  											\
-		$(STACK)/stacktop.c $(STACK)/empty.c $(STACK)/pop.c $(STACK)/push.c
+		$(STACK)/stacktop.c $(STACK)/empty.c $(STACK)/pop.c $(STACK)/push.c \
+		$(QUEUE)/ft_peek.c $(QUEUE)/ft_empty.c $(QUEUE)/ft_enqueue.c 		\
+		$(QUEUE)/ft_dequeue.c
 
 OBJ = 	ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o			\
 		ft_isdigit.o ft_isprint.o ft_ispunct.o ft_isspace.o ft_itoa.o		\
@@ -101,8 +104,9 @@ OBJ = 	ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o			\
 		ft_hash.o add_element.o copy_array.o delete_element.o 				\
 		edit_element.o find_element.o free_array.o init_array.o 			\
 		print_elements.o realloc_array.o ft_strtrimchr.o str_to_array.o 	\
-		free_double_array.o ft_del.o												\
-		stacktop.o empty.o pop.o push.o
+		free_double_array.o ft_del.o										\
+		stacktop.o empty.o pop.o push.o ft_peek.c ft_empty.c ft_enqueue.c 	\
+		ft_dequeue.c
 
 NAME = libft.a
 
