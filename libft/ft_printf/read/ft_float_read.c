@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft.h"
+#include "../ft_printf.h"
 
 static void	ft_creat_str(int size, char **prefix, char c)
 {

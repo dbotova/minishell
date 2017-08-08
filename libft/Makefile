@@ -10,26 +10,40 @@
 #                                                                              #
 # **************************************************************************** #
 
-PRINTF = ./ft_printf
-ARRAY = ./array_wrap
-PPATH = ./$(PRINTF)/print
-RPATH = ./$(PRINTF)/read
-UPATH = ./$(PRINTF)/util
+PRINTF =	./ft_printf
+ARRAY =		./array_wrap
+LLIST =		./llist
+PPATH =		./$(PRINTF)/print
+RPATH =		./$(PRINTF)/read
+UPATH =		./$(PRINTF)/util
+STACK =		./stack
+STR =		./str
+MEM =		./mem
 
-SRC =	libft.h																\
-		ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c			\
+HEADERS =	libft.h $(LLIST)/llist.h $(STACK)/stack.h $(STR)/str.h $(MEM)/mem.h \
+			$(PRINTF)/ft_printf.h
+
+SRC =	ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c					\
 		ft_isdigit.c ft_isprint.c ft_ispunct.c ft_isspace.c ft_itoa.c		\
-		ft_lstadd.c ft_lstdel.c ft_lstdelone.c ft_lstiter.c ft_lstmap.c		\
-		ft_lstnew.c ft_memalloc.c ft_memccpy.c ft_memchr.c ft_memcmp.c		\
-		ft_memcpy.c ft_memdel.c ft_memmove.c ft_memset.c ft_putchar.c		\
+		$(LLIST)/ft_lstadd.c $(LLIST)/ft_lstdel.c $(LLIST)/ft_lstdelone.c 	\
+		$(LLIST)/ft_lstiter.c $(LLIST)/ft_lstmap.c	$(LLIST)/ft_list_last.c	\
+		$(LLIST)/ft_lstnew.c 												\
+		$(MEM)/ft_memalloc.c $(MEM)/ft_memccpy.c $(MEM)/ft_bzero.c			\
+		$(MEM)/ft_memchr.c $(MEM)/ft_memcmp.c $(MEM)/ft_memset.c			\
+		$(MEM)/ft_memcpy.c $(MEM)/ft_memdel.c $(MEM)/ft_memmove.c  			\
 		ft_putchar_fd.c ft_putendl.c ft_putendl_fd.c ft_putnbr.c			\
-		ft_putnbr_fd.c ft_putstr.c ft_putstr_fd.c ft_strcat.c ft_strchr.c	\
-		ft_strclr.c ft_strcmp.c ft_strcpy.c ft_strdel.c ft_strdup.c			\
-		ft_strequ.c ft_striter.c ft_striteri.c ft_strjoin.c ft_strlcat.c	\
-		ft_strlen.c ft_strmap.c ft_strmapi.c ft_strncat.c ft_strncmp.c		\
-		ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c		\
-		ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c		\
-		ft_toupper.c ft_strlowcase.c ft_strupcase.c ft_list_last.c 			\
+		ft_putnbr_fd.c ft_putstr.c ft_putstr_fd.c $(STR)/ft_strcat.c 		\
+		$(STR)/ft_strchr.c	$(STR)/ft_strcpy.c $(STR)/ft_strdel.c 			\
+		$(STR)/ft_strclr.c $(STR)/ft_strcmp.c  $(STR)/ft_strdup.c			\
+		$(STR)/ft_strequ.c $(STR)/ft_striter.c $(STR)/ft_striteri.c 		\
+		$(STR)/ft_strjoin.c $(STR)/ft_strlcat.c	$(STR)/ft_strnstr.c 		\
+		$(STR)/ft_strlen.c $(STR)/ft_strmap.c $(STR)/ft_strmapi.c 			\
+		$(STR)/ft_strncat.c $(STR)/ft_strncmp.c	$(STR)/ft_strrchr.c			\
+		$(STR)/ft_strncpy.c $(STR)/ft_strnequ.c $(STR)/ft_strnew.c 			\
+		$(STR)/ft_strsplit.c $(STR)/ft_strstr.c $(STR)/ft_strsub.c 			\
+		$(STR)/ft_strtrim.c ft_tolower.c $(STR)/ft_strlowcase.c 			\
+		$(STR)/ft_strupcase.c 												\
+		ft_toupper.c ft_putchar.c free_double_array.c						\
 		get_next_line.c ft_ftoa_precision.c ft_getnum.c ft_ltoa_base.c 		\
 		ft_nbrsize.c ft_power.c ft_putnstr.c ft_putwchar.c ft_putwstr.c 	\
 		ft_ultoa_base.c ft_wcharlen.c ft_wstrlen.c ft_num_separete.c 		\
@@ -48,13 +62,14 @@ SRC =	libft.h																\
 		$(RPATH)/ft_wstr_read.c $(RPATH)/ft_hex_read.c						\
 		$(UPATH)/ft_create_jump_table.c $(UPATH)/ft_getflags.c 				\
 		$(UPATH)/ft_newflagslst.c $(RPATH)/ft_str_read.c ft_itoa_base.c 	\
-		get_next_word.c get_next_line.c ft_hash.c $(ARRAY)/add_element.c 	\
+		get_next_word.c ft_hash.c  											\
 		$(ARRAY)/copy_array.c $(ARRAY)/delete_element.c 					\
 		$(ARRAY)/edit_element.c $(ARRAY)/find_element.c 					\
 		$(ARRAY)/free_array.c $(ARRAY)/init_array.c 						\
 		$(ARRAY)/print_elements.c $(ARRAY)/realloc_array.c 					\
-		$(ARRAY)/str_to_array.c 											\
-		ft_strtrimchr.c free_double_array.c
+		$(ARRAY)/str_to_array.c $(ARRAY)/add_element.c						\
+		$(STR)/ft_strtrimchr.c  											\
+		$(STACK)/stacktop.c $(STACK)/empty.c $(STACK)/pop.c $(STACK)/push.c
 
 OBJ = 	ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o			\
 		ft_isdigit.o ft_isprint.o ft_ispunct.o ft_isspace.o ft_itoa.o		\
@@ -86,14 +101,19 @@ OBJ = 	ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o			\
 		ft_hash.o add_element.o copy_array.o delete_element.o 				\
 		edit_element.o find_element.o free_array.o init_array.o 			\
 		print_elements.o realloc_array.o ft_strtrimchr.o str_to_array.o 	\
-		free_double_array.o
+		free_double_array.o 												\
+		stacktop.o empty.o pop.o push.o
 
 NAME = libft.a
 
+CFLAGS += -Wall -Werror -Wextra -g -c -O0 -I.
+
 all: $(NAME)
 
+$(OBJ): $(HEADERS)
+
 $(NAME):
-	gcc -c -g -Wall -Wextra -Werror $(SRC)
+	$(CC) $(CFLAGS) $(SRC)
 	ar rc $(NAME) $(OBJ)
 
 clean:

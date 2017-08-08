@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft.h"
+#include "../ft_printf.h"
 
 static int	ft_flag_is_minus(char *ptr, t_flags **flags)
 {

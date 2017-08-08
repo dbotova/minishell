@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "ft_printf.h"
 
 static int	ft_sread(char *ptr, va_list ap, t_flags **flags, char *undef)
 {

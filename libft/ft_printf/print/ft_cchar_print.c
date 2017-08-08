@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft.h"
+#include "../ft_printf.h"
 
 static void	ft_putline(char *width_left, char *prefix, wchar_t *c,
 		char *width_right)

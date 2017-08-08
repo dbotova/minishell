@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "./str/str.h"
 
 static int			read_line(char *buf, char **word)
 {

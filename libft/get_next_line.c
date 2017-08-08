@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "./str/str.h"
 
 static t_file		*ft_flnew(int fd)
 {

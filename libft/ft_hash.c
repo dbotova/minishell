@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "./mem/mem.h"
 
 static unsigned int mix(unsigned int internal_state, unsigned int message_block)
 {

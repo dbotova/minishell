@@ -31,7 +31,7 @@ LIBS= $(LIBFT)
 
 HEADERS = minishell.h ./libft/libft.h
 
-CFLAGS += -Wall -Werror -Wextra -g -O0
+CFLAGS += -Wall -Werror -Wextra -g -O0 -I.
 #CFLAGS += -g -O0 -I.
 
 NAME = minishell
