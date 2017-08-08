@@ -13,6 +13,7 @@
 
 extern t_array_wrap *g_envars;
 extern t_array_wrap	*g_paths;
+extern t_list		*g_cd_history;
 
 int		ft_setenv(char *name, char *value, int overwrite);
 int		ft_unsetenv(char *name);

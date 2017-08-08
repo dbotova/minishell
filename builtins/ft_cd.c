@@ -12,25 +12,8 @@
 
 #include "../minishell.h"
 
-static	char			*get_pwd(char *path, char *resolved_path,
-						t_list *cd_history)
+static	char			*get_pwd(char *path, char *resolved_path)
 {
-	t_list *old_pwd;
-
-	old_pwd = NULL;
-	if (path && ft_strcmp(path, "-") == 0)
-	{
-		old_pwd = ft_pop(&cd_history);
-		if (!old_pwd)
-		{
-			ft_putstr_fd(NAME, 2);
-			ft_putstr_fd(": OLDPWD is not set\n", 2);
-			return (NULL);
-		}
-		else
-			ft_memcpy(resolved_path, old_pwd->content, old_pwd->content_size);
-		return (resolved_path);
-	}
 	if (!ft_realpath(path, resolved_path))
 	{
 		ft_putstr_fd("Path resolving error\n", 2);
@@ -44,12 +27,33 @@ static	char			*get_pwd(char *path, char *resolved_path,
 	return (resolved_path);
 }
 
-void					ft_cd(char **args) // cd -
+static void	undo(char *resolved_path, char *cur_pwd)
+{
+	t_list *old_pwd;
+	char				buf[PATH_MAX];
+
+	old_pwd = NULL;
+	old_pwd = ft_pop(&g_cd_history);
+	if (!old_pwd)
+	{
+		ft_putstr_fd(NAME, 2);
+		ft_putstr_fd(": OLDPWD is not set\n", 2);
+		return ;
+	}
+	else
+		ft_memcpy(resolved_path, old_pwd->content, old_pwd->content_size);
+	chdir(resolved_path);
+	getcwd(buf, PATH_MAX);
+	ft_setenv("OLDPWD", cur_pwd, 1);
+	ft_setenv("PWD", buf, 1);
+	ft_lstdelone(&old_pwd, ft_del);
+}
+
+void					ft_cd(char **args)
 {
 	char				*cur_pwd;
 	char				buf[PATH_MAX];
 	char				resolved_path[PATH_MAX];
-	static t_list		*cd_history;
 
 	cur_pwd = NULL;
 	ft_bzero(resolved_path, PATH_MAX);
@@ -58,7 +62,12 @@ void					ft_cd(char **args) // cd -
 		ft_printf("PWD is not set\n");
 		return ;
 	}
-	if (!get_pwd(args[1], resolved_path, cd_history))
+	if (args[1] && ft_strcmp(args[1], "-") == 0)
+	{
+		undo(resolved_path, cur_pwd);
+		return ;
+	}
+	if (!get_pwd(args[1], resolved_path))
 		return ;
 	if (ft_strcmp(cur_pwd, resolved_path) == 0)
 		return ;
@@ -70,6 +79,6 @@ void					ft_cd(char **args) // cd -
 	if (!getcwd(buf, PATH_MAX))
 		return ;
 	ft_setenv("OLDPWD", cur_pwd, 1);
-	ft_push(&cd_history, cur_pwd, ft_strlen(cur_pwd));
+	ft_push(&g_cd_history, cur_pwd, ft_strlen(cur_pwd));
 	ft_setenv("PWD", buf, 1);
 }

@@ -63,7 +63,7 @@ char	*ft_realpath(const char *path, char *resolved_path)
 	while ((level_up = ft_strstr(resolved_path, "..")))
 	{
 		tmp = level_up - 1;
-		if (*tmp == '/')
+		if (*tmp == '/' && tmp != resolved_path)
 			*tmp-- = 0;
 		while (*tmp != '/' && tmp != resolved_path)
 			*tmp-- = 0;

@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop.c                                              :+:      :+:    :+:   */
+/*   ft_del.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dz <marvin@42.fr>                          +#+  +:+       +#+        */
+/*   By: dbotova <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/06 21:11:02 by dz                #+#    #+#             */
-/*   Updated: 2017/08/06 21:11:03 by dz               ###   ########.fr       */
+/*   Created: 2017/08/08 11:24:19 by dbotova           #+#    #+#             */
+/*   Updated: 2017/08/08 11:24:20 by dbotova          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "llist.h"
 
-t_list	*ft_pop(t_list **list)
+void	ft_del(void *data, size_t size)
 {
-	t_list *top;
-
-	top = NULL;
-	if (!ft_empty(*list))
-	{
-		top = *list;
-		*list = (*list)->next;
-	}
-	return (top);
+	ft_memset(data, 0, size);
 }

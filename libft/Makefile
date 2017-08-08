@@ -27,7 +27,7 @@ SRC =	ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c					\
 		ft_isdigit.c ft_isprint.c ft_ispunct.c ft_isspace.c ft_itoa.c		\
 		$(LLIST)/ft_lstadd.c $(LLIST)/ft_lstdel.c $(LLIST)/ft_lstdelone.c 	\
 		$(LLIST)/ft_lstiter.c $(LLIST)/ft_lstmap.c	$(LLIST)/ft_list_last.c	\
-		$(LLIST)/ft_lstnew.c 												\
+		$(LLIST)/ft_lstnew.c $(LLIST)/ft_del.c											\
 		$(MEM)/ft_memalloc.c $(MEM)/ft_memccpy.c $(MEM)/ft_bzero.c			\
 		$(MEM)/ft_memchr.c $(MEM)/ft_memcmp.c $(MEM)/ft_memset.c			\
 		$(MEM)/ft_memcpy.c $(MEM)/ft_memdel.c $(MEM)/ft_memmove.c  			\
@@ -101,7 +101,7 @@ OBJ = 	ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o			\
 		ft_hash.o add_element.o copy_array.o delete_element.o 				\
 		edit_element.o find_element.o free_array.o init_array.o 			\
 		print_elements.o realloc_array.o ft_strtrimchr.o str_to_array.o 	\
-		free_double_array.o 												\
+		free_double_array.o ft_del.o												\
 		stacktop.o empty.o pop.o push.o
 
 NAME = libft.a

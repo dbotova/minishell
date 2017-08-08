@@ -2,6 +2,7 @@
 
 t_array_wrap   *g_envars = NULL;
 t_array_wrap   *g_paths = NULL;
+t_list         *g_cd_history = NULL;
 
 static void init_setup()
 {
@@ -121,6 +122,13 @@ static int parse_commands(char **commands)
    return (0);
 }
 
+static void clean_up(void)
+{
+   free_array(g_envars);
+   free_array(g_paths);
+   ft_lstdel(&g_cd_history, ft_del);
+}
+
 int main(void)
 {
 	char *line;
@@ -145,7 +153,7 @@ int main(void)
       }
       SMART_FREE(line);
 	}
-	free_array(g_envars);
-	SMART_FREE(line);
+	clean_up();
+   SMART_FREE(line);
 	return 0;
 }
