@@ -29,6 +29,7 @@
 # include "./stack/stack.h"
 # include "./str/str.h"
 # include "./mem/mem.h"
+# include "./queue/queue.h"
 # define BUFF_SIZE 2
 # define ABS(x) (x < 0) ? (-x) : (x)
 # define MIN(x, y) (x < y) ? (x) : (y)

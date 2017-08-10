@@ -13,31 +13,6 @@ static void init_setup()
 	system("clear");
 }
 
-// static char **get_args(char *command)
-// {
-//    char **args;
-//    char  *options;
-
-//    args = (char**)malloc(sizeof(char*) * 3);
-//    options = ft_strchr(command, ' ');
-//    if (options)
-//    {
-//       options++;
-//       args[0] = (char*)malloc(sizeof(char) * (options - command));
-//       ft_memset(args[0], 0, sizeof(char) * (options - command));
-//       args[0] = ft_strncpy(args[0], command, options - command - 1);
-//       args[1] = ft_strdup(options);
-//    }
-//    else
-//    {
-//       args[0] = ft_strdup(command);
-//       args[1] = NULL;
-//    }
-//    args[2] = NULL;
-//    return (args);
-
-// }
-
 static int hash_key(char *str)
 {
    int key = 0;
@@ -77,7 +52,6 @@ static int parse_commands(char **commands)
    while (*commands)
    {
       cur_command = ft_strtrim(*commands);
-      //args = get_args(cur_command);
       args = ft_strsplit(cur_command,' ');
       SMART_FREE(cur_command);
       if (ft_strcmp(args[0], "env") == 0 && !args[1])
@@ -89,8 +63,7 @@ static int parse_commands(char **commands)
       else if (ft_strcmp(args[0], "cd") == 0)
          ft_cd(args);
       else if (ft_strcmp(args[0], "echo") == 0)
-         //ft_echo_check(args);
-         ft_echo(args[1]);
+         ft_echo(args);
       else if (ft_strcmp(args[0], "exit") == 0)
          return (ft_exit(args));
       else if (ft_strcmp(args[0], "debug") == 0) //remove

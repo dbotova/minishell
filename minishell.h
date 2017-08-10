@@ -18,7 +18,7 @@ extern t_list		*g_cd_history;
 int		ft_setenv(char *name, char *value, int overwrite);
 int		ft_unsetenv(char *name);
 void	ft_cd(char **args);
-int		ft_echo(char *line);
+int		ft_echo(char **args);
 int		ft_exit(char **args);
 int		ft_run(char **args);
 

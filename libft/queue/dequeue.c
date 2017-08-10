@@ -10,4 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "queue.h"
 
+t_list	*ft_dequeue(t_queue *queue)
+{
+	t_list *item;
+
+	item = NULL;
+	if (!ft_qempty(queue))
+	{
+		item = queue->front;
+		queue->front = queue->front->next;
+	}
+	return (item);
+}

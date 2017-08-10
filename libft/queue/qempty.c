@@ -10,4 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "queue.h"
 
+int	ft_qempty(t_queue *queue)
+{
+	if (!queue)
+		return (-1);
+	if (!queue->front)
+		return (1);
+	return (0);
+}

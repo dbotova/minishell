@@ -71,8 +71,8 @@ SRC =	ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c					\
 		$(ARRAY)/str_to_array.c $(ARRAY)/add_element.c						\
 		$(STR)/ft_strtrimchr.c  											\
 		$(STACK)/stacktop.c $(STACK)/empty.c $(STACK)/pop.c $(STACK)/push.c \
-		$(QUEUE)/ft_peek.c $(QUEUE)/ft_empty.c $(QUEUE)/ft_enqueue.c 		\
-		$(QUEUE)/ft_dequeue.c
+		$(QUEUE)/peek.c $(QUEUE)/qempty.c $(QUEUE)/enqueue.c 		\
+		$(QUEUE)/dequeue.c $(QUEUE)/init_queue.c
 
 OBJ = 	ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o			\
 		ft_isdigit.o ft_isprint.o ft_ispunct.o ft_isspace.o ft_itoa.o		\
@@ -105,8 +105,8 @@ OBJ = 	ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o			\
 		edit_element.o find_element.o free_array.o init_array.o 			\
 		print_elements.o realloc_array.o ft_strtrimchr.o str_to_array.o 	\
 		free_double_array.o ft_del.o										\
-		stacktop.o empty.o pop.o push.o ft_peek.c ft_empty.c ft_enqueue.c 	\
-		ft_dequeue.c
+		stacktop.o empty.o pop.o push.o peek.o qempty.o enqueue.o 	\
+		dequeue.o init_queue.o
 
 NAME = libft.a
 

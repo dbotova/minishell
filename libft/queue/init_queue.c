@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enqueue.c                                          :+:      :+:    :+:   */
+/*   init_queue.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbotova <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dz <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/08 14:43:50 by dbotova           #+#    #+#             */
-/*   Updated: 2017/08/08 14:43:52 by dbotova          ###   ########.fr       */
+/*   Created: 2017/08/09 20:43:00 by dz                #+#    #+#             */
+/*   Updated: 2017/08/09 20:43:02 by dz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "queue.h"
 
-void	ft_enqueue(t_queue *queue, void *content, size_t size)
+t_queue	*init_queue()
 {
-	t_list *new;
+	t_queue *new;
 
-	new = ft_lstnew(content, size);
-	if (ft_qempty(queue))
-	{
-		queue->front = new;
-		queue->last = new;
-	}
-	else
-	{
-		queue->last->next = new;
-		queue->last = new;
-	}
+	new = malloc(sizeof(t_queue));
+	new->front = NULL;
+	new->last = NULL;
+	return (new);
 }

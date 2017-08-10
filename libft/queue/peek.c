@@ -10,4 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "queue.h"
 
+t_list	*ft_peek(t_queue *queue)
+{
+	t_list *first;
+
+	first = NULL;
+	if (!ft_qempty(queue))
+	{
+		first = ft_dequeue(queue);
+		ft_enqueue(queue, first->content, first->content_size);
+	}
+	return (first);
+}

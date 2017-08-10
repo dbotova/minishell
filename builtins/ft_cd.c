@@ -32,7 +32,7 @@ static	char			*get_pwd(char *path, char *resolved_path,
 
 static void	undo(char *resolved_path, char *cur_pwd)
 {
-	t_list *old_pwd;
+	t_list				*old_pwd;
 	char				buf[PATH_MAX];
 
 	old_pwd = NULL;

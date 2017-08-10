@@ -12,66 +12,63 @@
 
 #include "../minishell.h"
 
-static int 	ft_quote_match(char *path)
+static int	echo_read(char **args, int i, t_queue *text)
 {
-	int 	count;
-	char	*match;
+	int qoutes;
 
-	match = NULL;
-	count = 0;
-	while ((match = ft_strchr(path, '"')))
+	qoutes = 0;
+	while(args[i])
 	{
-		path = match + 1;
-		count++;
+		if (ft_strchr(args[i], '"'))
+		{
+			qoutes++;
+			ft_strtrimchr(args[i], '"');
+		}
+		ft_enqueue(text, args[i], ft_strlen(args[i]));
+		i++;
 	}
-	if (count % 2 == 0)
-		return (0);
-	return (1);
+	ft_enqueue(text, "\n", 1);
+	return (qoutes);
 }
 
-static void	ft_dquote(t_array_wrap *lines)
+static void	print_text(t_queue *text)
 {
-	char *next;
-	int  qoute_end;
+	t_list *cur;
+	char	env[PATH_MAX];
 
-	next = NULL;
-	qoute_end = 0;
-	while (qoute_end == 0)
+	cur = NULL;
+	bzero(env, PATH_MAX);
+	while (!ft_qempty(text))
 	{
-		ft_printf(DQUOTE);
-		get_next_line(0, &next);
-		qoute_end = ft_quote_match(next);
-		add_element(lines, next);
-		SMART_FREE(next);
+		cur = ft_dequeue(text);
+		if (ft_strncmp(cur->content, "$", 1) == 0)
+			/*skip '$' and take variable name */
+			ft_strcpy(env, ft_getenv(cur->content + 1));
+		else
+			ft_strcpy(env, cur->content);
+		ft_printf("%s", env);
+		if (!ft_qempty(text) && ft_strcmp(env, "\n") != 0)
+			ft_putchar(' ');
+		ft_lstdelone(&cur, ft_del);
 	}
 }
 
-int ft_echo_check(char **args)
+int	ft_echo(char **args)
 {
-	return (ft_echo(args[1]));
-}
+	t_queue	*text;
+	int		qoutes;
+	char	*line;
 
-int	ft_echo(char *path) //evar value refactor with dequeue
-{
-	t_array_wrap *lines;
-	size_t		i;
-
-	i = 0;
-	if (!path)
+	text = init_queue();
+	qoutes = 0;
+	line = NULL;
+	qoutes += echo_read(args, 1, text);
+	while (qoutes % 2 != 0)
 	{
-		ft_printf("\n");
-		return (0);
+		get_next_line(0, &line);
+		qoutes += echo_read(ft_strsplit(line, ' '), 0, text);
+		SMART_FREE(line);
 	}
-	lines = (t_array_wrap*)malloc(sizeof(t_array_wrap));
-	init_array(&lines, SIZE_BLOCK);
-	add_element(lines, path);
-	if (ft_quote_match(path))
-		ft_dquote(lines);
-	while (i < lines->used)
-	{
-		ft_strtrimchr(lines->data[i], '"');
-		ft_printf("%s\n", lines->data[i++]);
-	}
-	free_array(lines);
+	print_text(text);
 	return (0);
 }
