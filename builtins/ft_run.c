@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	ft_run(char **args) //fix args
+int	ft_run(char **args)
 {
 	pid_t	pid;
 	pid_t	wpid;
@@ -30,12 +30,14 @@ int	ft_run(char **args) //fix args
 		if (execve(args[0], args, g_envars->data) == -1)
 			exit(2);
 	}
-	else // replace do...while
+	else
 	{
-	    do
+	    while (42)
 	    {
-	      wpid = waitpid(pid, &status, WUNTRACED);
-	    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+	    	wpid = waitpid(pid, &status, WUNTRACED);
+	    	if (WIFEXITED(status) || WIFSIGNALED(status))
+	    		break ;
+	    }
 	}
 	return ((WEXITSTATUS(status) == 2) ? -1 : 0);
 }

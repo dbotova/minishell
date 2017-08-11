@@ -35,15 +35,21 @@ static void	print_text(t_queue *text)
 {
 	t_list *cur;
 	char	env[PATH_MAX];
+	char	*tmp;
 
 	cur = NULL;
-	bzero(env, PATH_MAX);
 	while (!ft_qempty(text))
 	{
+		bzero(env, PATH_MAX);
+		tmp = NULL;
 		cur = ft_dequeue(text);
 		if (ft_strncmp(cur->content, "$", 1) == 0)
+		{
 			/*skip '$' and take variable name */
-			ft_strcpy(env, ft_getenv(cur->content + 1));
+			tmp = ft_getenv(cur->content + 1);
+			if (tmp)
+				ft_strcpy(env, tmp);
+		}
 		else
 			ft_strcpy(env, cur->content);
 		ft_printf("%s", env);
