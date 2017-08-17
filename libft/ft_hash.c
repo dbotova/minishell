@@ -19,7 +19,7 @@ static unsigned int mix(unsigned int internal_state, unsigned int message_block)
           ((internal_state << 3) + (message_block >> 2));
 }
 
-unsigned int hash(char *message, size_t message_length)
+unsigned int ft_hash(char *message, size_t message_length)
 {
 	unsigned int internal_state = MAGIC_NUMBER;
 	unsigned int message_block = 0;

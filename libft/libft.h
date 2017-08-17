@@ -30,7 +30,8 @@
 # include "./str/str.h"
 # include "./mem/mem.h"
 # include "./queue/queue.h"
-# define BUFF_SIZE 2
+# include "./hashtable/hashtable.h"
+# define BUFF_SIZE 100
 # define ABS(x) (x < 0) ? (-x) : (x)
 # define MIN(x, y) (x < y) ? (x) : (y)
 # define MAX(x, y) (x > y) ? (x) : (y)
@@ -40,6 +41,7 @@
 # define FLAGS "+-.0123456789zlhj#* L'"
 # define SMART_FREE(x) {free(x); x = NULL;}
 # define MAGIC_NUMBER 42
+# define SIZE_BLOCK 100
 
 typedef struct			s_file
 {
@@ -48,7 +50,7 @@ typedef struct			s_file
 	struct s_file		*next;
 }						t_file;
 
-unsigned int 			hash(char *message, size_t message_length);
+unsigned int 			ft_hash(char *message, size_t message_length);
 char					*ft_ltoa_base(long long n, int base);
 int						get_next_line(const int fd, char **line);
 int						get_next_word(const char *line, char **word);
