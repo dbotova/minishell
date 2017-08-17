@@ -10,7 +10,7 @@ static void init_setup()
 
 	init_array(&g_envars, SIZE_BLOCK);
 	copy_array(g_envars, environ);
-	system("clear");
+	system("clear"); //remove
 }
 
 static int hash_key(char *str)
@@ -44,14 +44,38 @@ static   char *ft_append_path(char *location, char *name)
    return (result);
 }
 
+static int check_binary(char **args)
+{
+   int result;
+   int i;
+   char *name;
+
+   result = -1;
+   i = 0;
+   name = ft_strdup(args[0]);
+   if ((result = ft_run(args)) == -1 && g_paths)
+   {
+      while(result != 0 && g_paths->data[i])
+      {
+         SMART_FREE(args[0]);
+         args[0] = ft_strdup(ft_append_path(g_paths->data[i++], name));
+         result = ft_run(args);
+      }
+   }
+   SMART_FREE(name);
+   return (result);
+}
+
 static int parse_commands(char **commands)
 {
    char **args;
    char  *cur_command;
+   static char *cur_path;
 
+   cur_path = NULL;
    while (*commands)
    {
-      cur_command = ft_strtrim(*commands);
+      cur_command = ft_strtrim(*commands); //create hash function call table
       args = ft_strsplit(cur_command,' ');
       SMART_FREE(cur_command);
       if (ft_strcmp(args[0], "env") == 0 && !args[1])
@@ -70,26 +94,17 @@ static int parse_commands(char **commands)
          debug();
       else //fix all leaks and clean up
       {
-         int result = -1;
-         char *old = ft_strdup(args[0]);
-         if (!g_paths)
-            break ;
-         for (int i = 0; g_paths->data[i]; i++)
+         if (!cur_path || ft_strcmp(cur_path, ft_getenv("PATH")) != 0)
          {
-            if (result == 0)
-               break ;
-            SMART_FREE(args[0]);
-            args[0] = ft_strdup(ft_append_path(g_paths->data[i], old));
-            result = ft_run(args);
+            if (g_paths)
+            {
+               free_array(g_paths);
+               g_paths = NULL;
+            }
+            str_to_array(&g_paths, ft_getenv("PATH"), ':');
          }
-         if (result == -1)
-         {
-            SMART_FREE(args[0]);
-            args[0] = ft_strdup(old);
-            if (ft_run(args) == -1)
-               ft_putstr_fd("No such file or directory\n", 2);
-         }
-         SMART_FREE(old);
+         if (check_binary(args) == -1)
+            ft_putstr_fd("No such file or directory\n", 2);
       }
       commands++;
       free_double_array(args);
@@ -117,14 +132,14 @@ int main(void)
       ft_printf(PROMPT);
       get_next_line(0, &line);
       commands = ft_strsplit(line, ';');
-      str_to_array(&g_paths, ft_getenv("PATH"), ':');
+      // str_to_array(&g_paths, ft_getenv("PATH"), ':');
       if (commands)
       {  
          if (parse_commands(commands))
             break ;
          free_double_array(commands);
-         free_array(g_paths);
-         g_paths = NULL;
+         //free_array(g_paths);
+         // g_paths = NULL;
       }
       SMART_FREE(line);
 	}

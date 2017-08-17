@@ -10,19 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
-PRINTF =	./ft_printf
-ARRAY =		./array_wrap
-LLIST =		./llist
-PPATH =		./$(PRINTF)/print
-RPATH =		./$(PRINTF)/read
-UPATH =		./$(PRINTF)/util
-STACK =		./stack
-STR =		./str
-MEM =		./mem
-QUEUE =		./queue
+PRINTF =		./ft_printf
+ARRAY =			./array_wrap
+LLIST =			./llist
+PPATH =			./$(PRINTF)/print
+RPATH =			./$(PRINTF)/read
+UPATH =			./$(PRINTF)/util
+STACK =			./stack
+STR =			./str
+MEM =			./mem
+QUEUE =			./queue
+HASHTABLE =		./hashtable
 
-HEADERS =	libft.h $(LLIST)/llist.h $(STACK)/stack.h $(STR)/str.h $(MEM)/mem.h \
-			$(PRINTF)/ft_printf.h $(QUEUE)/queue.h
+HEADERS =	libft.h $(LLIST)/llist.h $(STACK)/stack.h $(STR)/str.h 			\
+			$(MEM)/mem.h $(PRINTF)/ft_printf.h $(QUEUE)/queue.h 			\
+			$(HASHTABLE)/hashtable.h
 
 SRC =	ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c					\
 		ft_isdigit.c ft_isprint.c ft_ispunct.c ft_isspace.c ft_itoa.c		\
