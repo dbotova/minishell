@@ -17,11 +17,11 @@ ssize_t				find_element(t_array_wrap *array, char *item, size_t len, char symb)
 	unsigned int	key;
 	size_t			i;
 
-	key = hash(item, len);
+	key = ft_hash(item, len);
 	i = 0;
 	while (i < array->used)
 	{
-		if (array->data[i] && hash(array->data[i], len) == key)
+		if (array->data[i] && ft_hash(array->data[i], len) == key)
 			if (ft_strncmp(array->data[i], item, len) == 0 &&
 				array->data[i][len] == symb)
 				return (i);

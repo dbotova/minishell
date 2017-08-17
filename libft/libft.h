@@ -26,6 +26,7 @@
 # include "./ft_printf/ft_printf.h"
 # include "./array_wrap/array_wrap.h"
 # include "./llist/llist.h"
+# include "./dllist/dllist.h"
 # include "./stack/stack.h"
 # include "./str/str.h"
 # include "./mem/mem.h"

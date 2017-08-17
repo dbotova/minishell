@@ -12,11 +12,14 @@
 
 #include "hashtable.h"
 
-void			htable_add(t_hashtable *table, void *object, unsigned int size)
+void			htable_add(t_hashtable *table, void *object, unsigned int size,
+				void (*hash)(void *, size_t))
 {
 	unsigned int	hash;
+	t_dlist			*new;
 
-	hash = ft_hash(object, ft_strlen(object) + 1);
+	new = ft_dlstnew(object, size);
+	hash = hash(object, ft_strlen(object));
 	if (hash > table->size)
-		ft_dlstadd(table->data[hash], object, size);
+		ft_dlstadd(&table->data[hash], new);
 }

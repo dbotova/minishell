@@ -44,6 +44,11 @@ static   char *ft_append_path(char *location, char *name)
    return (result);
 }
 
+// static void build_jump_table(t_hashtable *table)
+// {
+
+// }
+
 static int check_binary(char **args)
 {
    int result;
@@ -92,10 +97,11 @@ static int parse_commands(char **commands)
          return (ft_exit(args));
       else if (ft_strcmp(args[0], "debug") == 0) //remove
          debug();
-      else //fix all leaks and clean up
+      else //move to ft_run?
       {
          if (!cur_path || ft_strcmp(cur_path, ft_getenv("PATH")) != 0)
          {
+            printf("\nHERE\n");
             if (g_paths)
             {
                free_array(g_paths);
@@ -132,14 +138,11 @@ int main(void)
       ft_printf(PROMPT);
       get_next_line(0, &line);
       commands = ft_strsplit(line, ';');
-      // str_to_array(&g_paths, ft_getenv("PATH"), ':');
       if (commands)
       {  
          if (parse_commands(commands))
             break ;
          free_double_array(commands);
-         //free_array(g_paths);
-         // g_paths = NULL;
       }
       SMART_FREE(line);
 	}

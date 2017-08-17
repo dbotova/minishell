@@ -14,5 +14,7 @@
 
 int		htable_has_key(t_hashtable *table, unsigned int key) //implement
 {
-	return (1);
+	if (table && key > 1)
+		return (1);
+	return (0);
 }

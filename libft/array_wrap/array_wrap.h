@@ -14,7 +14,7 @@
 # define ARRAY_WRAP_H
 # include "../str/str.h"
 # include "../mem/mem.h"
-# define SIZE_BLOCK 20
+//# define SIZE_BLOCK 20
 
 typedef struct	s_array_wrap
 {

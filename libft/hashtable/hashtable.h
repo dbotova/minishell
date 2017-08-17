@@ -21,9 +21,9 @@ typedef struct			s_hashtable
 	unsigned int 		size;
 }						t_hashtable;
 
-void					hashtable(t_hashtable **table, unsigned int size);
+void					hashtable(t_hashtable **table, size_t size);
 void					htable_add(t_hashtable *table, void *object,
-						unsigned int size);
+						unsigned int size, void (*hash)(void *, size_t));
 void					htable_remove(t_hashtable *table, void *object,
 						size_t size);
 int						htable_has_key(t_hashtable *table, unsigned int key);

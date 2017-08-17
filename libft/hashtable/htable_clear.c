@@ -19,7 +19,7 @@ void				htable_clear(t_hashtable *table)
 	i = 0;
 	while (i < table->size)
 	{
-		ft_dlstdel(&table->data[hash], ft_del);
+		ft_dlstdel(&table->data[i], ft_del);
 		i++;
 	}
 }

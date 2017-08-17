@@ -19,11 +19,10 @@ void			htable_remove(t_hashtable *table, void *object, size_t size)
 	t_dlist			*cur;
 
 	hash = ft_hash(object, ft_strlen(object) + 1);
-	item = NULL;
 	cur = NULL;
 	if (hash < table->size)
 	{	
-		cur = table->data[hash]
+		cur = table->data[hash];
 		if (!cur)
 			return ;
 		while (cur && ft_memcmp(cur->content, object, size) != 0)

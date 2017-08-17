@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//NOT TESTED, NOT FINISHED (add prev)
+
 #ifndef DLLIST_H
 # define DLLIST_H
 # include <stddef.h>

@@ -47,7 +47,7 @@ int	ft_setenv_check(char **args)
 	return (ft_export(args[1]));
 }
 
-int		ft_setenv(char *name, char *value, int overwrite) //don't change OLDPWD if path is a current dir
+int		ft_setenv(char *name, char *value, int overwrite)
 {
 	int	exsist;
 	char *item;

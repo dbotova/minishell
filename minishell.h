@@ -15,9 +15,11 @@ extern t_array_wrap *g_envars;
 extern t_array_wrap	*g_paths;
 extern t_list		*g_cd_history;
 
+typedef int(*p_func)(char**);
+
 int		ft_setenv(char *name, char *value, int overwrite);
 int		ft_unsetenv(char *name);
-void	ft_cd(char **args);
+int		ft_cd(char **args);
 int		ft_echo(char **args);
 int		ft_exit(char **args);
 int		ft_run(char **args);

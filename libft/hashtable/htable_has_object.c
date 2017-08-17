@@ -14,5 +14,7 @@
 
 int				htable_has_object(t_hashtable *table, void *object) //implement
 {
-	return (0);
+	if (table && object)
+		return (0);
+	return (1);
 }

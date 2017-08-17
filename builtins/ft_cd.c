@@ -59,32 +59,32 @@ static void				update(char *cur_pwd, char *buf)
 	ft_setenv("PWD", buf, 1);
 }
 
-void					ft_cd(char **args)
+int					ft_cd(char **args)
 {
 	char				*cur_pwd;
 	char				buf[PATH_MAX];
 	char				resolved_path[PATH_MAX];
 
 	cur_pwd = NULL;
-	ft_bzero(resolved_path, PATH_MAX);
 	if (!(cur_pwd = ft_getenv("PWD")))
 	{
 		ft_printf("PWD is not set\n");
-		return ;
+		return (1);
 	}
 	if (args[1] && ft_strcmp(args[1], "-") == 0)
 	{
 		undo(resolved_path, cur_pwd);
-		return ;
+		return (1);
 	}
 	if (!get_pwd(args[1], resolved_path, cur_pwd))
-		return ;
+		return (1);
 	if (chdir(resolved_path) < 0)
 	{
 		ft_putstr_fd("No such file or directory\n", 2);
-		return ;
+		return (1);
 	}
 	if (!getcwd(buf, PATH_MAX))
-		return ;
+		return (1);
 	update(cur_pwd, buf);
+	return (0);
 }
